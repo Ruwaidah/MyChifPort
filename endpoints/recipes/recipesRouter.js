@@ -69,65 +69,91 @@ router.post("/:id", (req, res) => {
     });
 });
 
-// Get recipe By Id
-router.get("/recipes/:id", (req, res) => {
+// Delete recipe
+router.delete("/recipes/:id", (req, res) => {
   Recipes.recipeById(req.params.id)
     .then(recipe => {
       if (recipe) {
-        console.log(recipe);
-        Recipes.findIngAndInst(recipe.id)
-          .then(ingAndInst => {
-            res.status(200).json({
-              recipe_name: recipe.recipe_name,
-              ingredients: ingAndInst.ingredients,
-              instructions: ingAndInst.instructions
-            });
+        Recipes.deleteIngAndInst(req.params.id)
+          .then(del => {
+            Recipes.deleteRecipe(req.params.id)
+              .then(dele => {
+                res.status(200).json({ message: "recipe deleted" });
+              })
+              .catch(error => {
+                res.status(500).json({
+                  message: "error deleting the recipe"
+                });
+              });
           })
           .catch(error => {
-            res.status(500).json(error => {
-              message: "error getting the ingredients and instructions";
+            res.status(500).json({
+              message: "error deleting the recipe"
             });
           });
       } else {
         res.status(404).json({
-          message: "no recipe with this id "
+          message: "no recipe with this id"
         });
       }
     })
     .catch(error => {
       res.status(500).json({
-        message: "error getting the recipe!"
+        message: "error deleting recipe"
       });
     });
 });
 
-// Delete recipe
-router.delete("/recipes/:id", (req, res) => {
-  Recipes.recipeById(req.params.id).then(recipe => {
-    if (recipe) {
-      Recipes.deleteIngAndInst(req.params.id)
-        .then(del => {
-          Recipes.deleteRecipe(req.params.id)
-            .then(dele => {
-              res.status(200).json({ message: "recipe deleted" });
+// Update recipe
+router.put("/recipes/:id", (req, res) => {
+  Recipes.recipeById(req.params.id)
+    .then(recipe => {
+      if (recipe) {
+        if (
+          req.body.instructions &&
+          req.body.ingredients &&
+          req.body.recipe_name
+        ) {
+          Recipes.updateIngAndInst(
+            {
+              ingredients: req.body.ingredients,
+              instructions: req.body.instructions
+            },
+            req.params.id
+          )
+            .then(update => {
+              Recipes.updateRecipe(
+                { recipe_name: req.body.recipe_name },
+                req.params.id
+              )
+                .then(updaerecipe => {
+                  res.status(200).json(updaerecipe);
+                })
+                .catch(error => {
+                  res.status(500).json({
+                    message: "error updating recipe"
+                  });
+                });
             })
-            .catch(error => {
-              res.status(500).json({
-                message: "error deleting the recipe"
-              });
+            .catch(erre => {
+              message: "error update recipe";
             });
-        })
-        .catch(error => {
-          res.status(500).json({
-            message: "error deleting the recipe"
+        } else {
+          res.status(404).json({
+            messsage: "Please fill out all the field"
           });
+        }
+      } else {
+        res.status(404).json({
+          message: "no recipe with this id"
         });
-    } else {
-      res.status(404).json({
-        message: "no recipe with this id"
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "error updating recipe"
       });
-    }
-  });
+    });
 });
 
 module.exports = router;

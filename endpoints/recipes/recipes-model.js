@@ -9,7 +9,9 @@ module.exports = {
   findIngAndInst,
   findRecipe,
   deleteIngAndInst,
-  deleteRecipe
+  deleteRecipe,
+  updateIngAndInst,
+  updateRecipe
 };
 
 function getAllRecipes() {
@@ -64,4 +66,16 @@ function deleteRecipe(id) {
   return db("recipes")
     .where({ id })
     .del();
+}
+
+function updateIngAndInst(data, id) {
+  return db("ing_inst")
+    .where({ recipe_id: id })
+    .update(data);
+}
+
+function updateRecipe(data, id) {
+  return db("recipes")
+    .where({ id })
+    .update(data);
 }
