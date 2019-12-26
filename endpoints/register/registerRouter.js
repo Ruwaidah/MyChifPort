@@ -3,7 +3,13 @@ const router = express.Router();
 const Users = require("./register-model.js");
 
 router.post("/", (req, res) => {
-  if (req.body.username && req.body.email && req.body.password) {
+  if (
+    req.body.username &&
+    req.body.email &&
+    req.body.password &&
+    req.body.firstname &&
+    req.body.lastname
+  ) {
     Users.findUser(req.body).then(user => {
       if (!user) {
         Users.addUSer(req.body).then(ids => {

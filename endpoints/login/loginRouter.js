@@ -18,6 +18,8 @@ router.post("/", (req, res) => {
               token,
               user: {
                 id: user.id,
+                firstname: user.firstname,
+                lastname: user.lastname,
                 username: user.username,
                 city: user.city,
                 state: user.state,
