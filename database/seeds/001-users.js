@@ -14,7 +14,8 @@ exports.seed = function(knex) {
           phone: 1234,
           city: "houston",
           state: "texas",
-          address: "216319bkjsbckjdsbckds"
+          address: "216319bkjsbckjdsbckds",
+          zipcode: "123"
         },
         {
           firstname: "rowValue1",
@@ -25,7 +26,8 @@ exports.seed = function(knex) {
           phone: 12345,
           city: "houston",
           state: "texas",
-          address: "216319bkjsbckjdsbckds"
+          address: "216319bkjsbckjdsbckds",
+          zipcode: "123"
         },
         {
           firstname: "rowValue1",
@@ -36,7 +38,8 @@ exports.seed = function(knex) {
           phone: 123213,
           city: "houston",
           state: "texas",
-          address: "216319bkjsbckjdsbckds"
+          address: "216319bkjsbckjdsbckds",
+          zipcode: "123"
         }
       ]);
     });

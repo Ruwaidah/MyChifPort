@@ -25,7 +25,8 @@ router.post("/", (req, res) => {
                 state: user.state,
                 phone: user.phone,
                 email: user.email,
-                address: user.address
+                address: user.address,
+                zipcode: user.zipcode
               }
             });
           } else {

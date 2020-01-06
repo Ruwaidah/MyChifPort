@@ -16,7 +16,6 @@ function Login(props) {
   const onSubmit = event => {
     event.preventDefault();
     props.loginUser(values, props.history);
-    props.history.push("/user");
   };
   if (!props.viewLogin) return null;
   if (props.viewLogin)

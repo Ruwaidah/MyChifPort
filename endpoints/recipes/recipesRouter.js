@@ -8,13 +8,7 @@ const Users = require("../login/login-model");
 router.get("/:id", (req, res) => {
   Recipes.findRecipe(req.params.id)
     .then(recipes => {
-      if (recipes.length > 0) {
-        res.status(200).json(recipes);
-      } else {
-        res.status(404).json({
-          message: "no recipes"
-        });
-      }
+      res.status(200).json(recipes);
     })
     .catch(error => {
       res.status(500).json({
@@ -38,7 +32,7 @@ router.post("/:id", (req, res) => {
             .then(id => {
               Recipes.addIngAndInst(req.body, id[0])
                 .then(id =>
-                  res.status(200).json({ message: "added new recipes" })
+                  res.status(200).json({ message: "added new recipe" })
                 )
                 .catch(error => {
                   res.status(500).json({

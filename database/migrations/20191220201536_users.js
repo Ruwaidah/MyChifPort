@@ -16,6 +16,7 @@ exports.up = function(knex) {
     tbl.string("state", 100);
     tbl.integer("phone", 100).unique();
     tbl.string("address", 100);
+    tbl.integer("zipcode", 100);
   });
 };
 
