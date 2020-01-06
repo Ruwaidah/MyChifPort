@@ -18,17 +18,23 @@ function getAllRecipes() {
   return db("recipes");
 }
 
-function addRecipe(name, id) {
+function addRecipe(name, image, id) {
   console.log(name, id);
-  return db("recipes").insert({ recipe_name: name, user_id: id });
+  return db("recipes").insert(
+    { recipe_name: name, user_id: id, image: image },
+    "id"
+  );
 }
 
 function addIngAndInst(items, id) {
-  return db("ing_inst").insert({
-    ingredients: items.ingredients,
-    instructions: items.instructions,
-    recipe_id: id
-  });
+  return db("ing_inst").insert(
+    {
+      ingredients: items.ingredients,
+      instructions: items.instructions,
+      recipe_id: id
+    },
+    "id"
+  );
 }
 
 function addAllRecipes() {

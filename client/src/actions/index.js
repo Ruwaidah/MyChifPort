@@ -11,7 +11,7 @@ export const globalRecipes = () => dispatch => {
     type: LOADING
   });
   axios
-    .get("https://chefportfolio10.herokuapp.com/api/recipes")
+    .get("https://chefportfolio11.herokuapp.com/api/recipes")
     .then(respo => {
       console.log(respo);
       dispatch({
@@ -32,8 +32,9 @@ export const loginUser = (user, history) => dispatch => {
     type: LOADING
   });
   axios
-    .post("https://chefportfolio10.herokuapp.com/api/auth/login", user)
+    .post("https://chefportfolio11.herokuapp.com/api/auth/login", user)
     .then(respo => {
+      console.log(respo);
       sessionStorage.setItem("token", respo.data.token);
       dispatch({
         type: LOGIN_FETCH,
@@ -52,19 +53,19 @@ export const loginUser = (user, history) => dispatch => {
 export const signUp = values => dispatch => {
   console.log(values);
   axios
-    .post("https://chefportfolio10.herokuapp.com/api/auth/register", values)
+    .post("https://chefportfolio11.herokuapp.com/api/auth/register", values)
     .then(respo => console.log(respo))
     .catch(error => console.log(error));
 };
 
 // Add recipe
 
-export const addRecipe = values => dispatch => {
+export const addRecipe = (values, id) => dispatch => {
   const authAxios = axiosWithAuth();
 
   console.log(values);
   authAxios
-    .post("https://chefportfolio10.herokuapp.com/api/auth/user/17", values)
+    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/${id}`, values)
     .then(respo => console.log(respo))
     .catch(error => console.log(error));
 };
@@ -75,7 +76,7 @@ export const recipeById = () => dispatch => {
     type: LOADING
   });
   axios
-    .get("https://chefportfolio10.herokuapp.com/api/recipes/20")
+    .get("https://chefportfolio11.herokuapp.com/api/recipes/20")
     .then(respo => {
       console.log(respo);
     })
@@ -88,7 +89,7 @@ export const updateRecipe = values => dispatch => {
 
   authAxios
     .put(
-      "https://chefportfolio10.herokuapp.com/api/auth/user/recipes/20",
+      "https://chefportfolio11.herokuapp.com/api/auth/user/recipes/20",
       values
     )
     .then(respo => {

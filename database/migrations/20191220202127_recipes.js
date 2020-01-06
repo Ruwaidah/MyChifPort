@@ -2,6 +2,7 @@ exports.up = function(knex) {
   return knex.schema.createTable("recipes", tbl => {
     tbl.increments();
     tbl.string("recipe_name", 100).notNullable();
+    tbl.string("image", 255);
     tbl
       .integer("user_id")
       .unsigned()

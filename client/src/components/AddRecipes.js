@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { addRecipe } from "../actions/index.js";
 
 function AddRecipes(props) {
+  console.log(props.user);
+  const [img, setImage] = useState();
   const [values, setValues] = useState({
     recipe_name: "",
     ingredients: "",
@@ -15,14 +17,29 @@ function AddRecipes(props) {
     });
   };
 
+  const onImageChange = event => {
+    setImage(event.target.files[0]);
+  };
+
   const onSubmit = event => {
     event.preventDefault();
-    console.log(values);
-    props.addRecipe(values);
+    const fd = new FormData();
+    fd.append("image", img, img.name);
+    console.log(fd);
+    values.image = fd;
+    props.addRecipe(values, props.user.id);
   };
+  console.log(img);
   return (
     <div>
       <form onSubmit={onSubmit}>
+        <label htmlFor="image">Image: </label>
+        <input
+          type="file"
+          onChange={onImageChange}
+          name="image"
+          placeholder="image"
+        />
         <label htmlFor="name">Recipe name: </label>
         <input
           onChange={onChange}
@@ -52,7 +69,8 @@ function AddRecipes(props) {
 
 const mapStatetoProps = state => {
   return {
-    isloading: state.isloading
+    isloading: state.isloading,
+    user: state.user
   };
 };
 

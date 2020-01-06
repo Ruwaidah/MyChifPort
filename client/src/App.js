@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <PrivateRoute>
         <Route path="/user" render={props => <DashBoard {...props} />} />
-        {/* <AddRecipes /> */}
+        <AddRecipes />
       </PrivateRoute>
       <Route
         exact
@@ -29,7 +29,7 @@ function App() {
         )}
       />
       <Login setViewLogin={setViewLogin} viewLogin={viewLogin} />
-      <UpdateRecipe />
+      {/* <UpdateRecipe /> */}
       <Register viewSignUp={viewSignUp} setViewSignUp={setViewSignUp} />
       <Route path="/recipes/:id" component={Recipe} />
     </div>
