@@ -20,18 +20,15 @@ function getAllRecipes() {
 
 function addRecipe(name, id) {
   console.log(name, id);
-  return db("recipes").insert({ recipe_name: name, user_id: id }, "id");
+  return db("recipes").insert({ recipe_name: name, user_id: id });
 }
 
 function addIngAndInst(items, id) {
-  return db("ing_inst").insert(
-    {
-      ingredients: items.ingredients,
-      instructions: items.instructions,
-      recipe_id: id
-    },
-    "id"
-  );
+  return db("ing_inst").insert({
+    ingredients: items.ingredients,
+    instructions: items.instructions,
+    recipe_id: id
+  });
 }
 
 function addAllRecipes() {
