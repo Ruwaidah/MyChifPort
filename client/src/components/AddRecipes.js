@@ -23,11 +23,17 @@ function AddRecipes(props) {
 
   const onSubmit = event => {
     event.preventDefault();
-    const fd = new FormData();
-    fd.append("image", img, img.name);
-    console.log(fd);
-    values.image = fd;
-    props.addRecipe(values, props.user.id);
+    let reader = new FileReader();
+    reader.readAsDataURL(img);
+    // const fd = new FormData();
+    // fd.append("image", img, img.name);
+    // console.log(fd.append("image", img, img.name));
+    reader.onload = e => {
+      console.log(e.target.result);
+      values.image = e.target.result;
+      props.addRecipe(values, props.user.id);
+    };
+    values.image = img;
   };
   console.log(img);
   return (

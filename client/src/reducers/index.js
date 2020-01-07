@@ -2,14 +2,16 @@ import {
   LOADING,
   GLOBAL_RECIPES_FETCH,
   FAILED,
-  LOGIN_FETCH
+  LOGIN_FETCH,
+  RECIPE_FETCH
 } from "../actions/index.js";
 
 const initiallstate = {
   recipes: [],
   user: {},
   isloading: false,
-  error: null
+  error: null,
+  data: null
 };
 
 export const rootReducer = (state = initiallstate, actions) => {
@@ -39,6 +41,14 @@ export const rootReducer = (state = initiallstate, actions) => {
       return {
         ...state,
         user: actions.payload,
+        isloading: false,
+        error: null
+      };
+    case RECIPE_FETCH:
+      console.log(actions.payload);
+      return {
+        ...state,
+        data: actions.payload,
         isloading: false,
         error: null
       };

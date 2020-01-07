@@ -3,6 +3,7 @@ import { axiosWithAuth } from "../components/axiosWithuth.js";
 export const LOADING = "LOADING";
 export const LOGIN_FETCH = "LOGIN_FETCH";
 export const FAILED = "FAILED";
+export const RECIPE_FETCH = "RECIPE_FETCH";
 
 export const GLOBAL_RECIPES_FETCH = "GLOBAL_RECIPES_FETCH";
 
@@ -71,14 +72,19 @@ export const addRecipe = (values, id) => dispatch => {
 };
 
 // Recipe By ID
-export const recipeById = () => dispatch => {
+export const recipeById = id => dispatch => {
+  console.log(id);
   dispatch({
     type: LOADING
   });
   axios
-    .get("https://chefportfolio11.herokuapp.com/api/recipes/20")
+    .get(`https://chefportfolio11.herokuapp.com/api/recipes/${id}`)
     .then(respo => {
       console.log(respo);
+      dispatch({
+        type: RECIPE_FETCH,
+        payload: respo.data
+      });
     })
     .catch(error => console.log(error));
 };

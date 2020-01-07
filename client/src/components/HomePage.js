@@ -5,7 +5,6 @@ import { globalRecipes } from "../actions/index.js";
 import { register } from "../serviceWorker.js";
 
 function HomePage(props) {
-  console.log(sessionStorage.getItem("token"));
   useEffect(() => {
     props.globalRecipes();
   }, []);

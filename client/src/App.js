@@ -25,13 +25,17 @@ function App() {
         exact
         path="/"
         render={props => (
-          <HomePage setViewLogin={setViewLogin} setViewSignUp={setViewSignUp} />
+          <HomePage
+            setViewLogin={setViewLogin}
+            setViewSignUp={setViewSignUp}
+            {...props}
+          />
         )}
       />
       <Login setViewLogin={setViewLogin} viewLogin={viewLogin} />
       {/* <UpdateRecipe /> */}
       <Register viewSignUp={viewSignUp} setViewSignUp={setViewSignUp} />
-      <Route path="/recipes/:id" component={Recipe} />
+      <Route path="/recipes/:id" render={props => <Recipe {...props} />} />
     </div>
   );
 }
