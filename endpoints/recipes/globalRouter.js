@@ -26,6 +26,7 @@ router.get("/:id", (req, res) => {
           .then(ingAndInst => {
             res.status(200).json({
               recipe_name: recipe.recipe_name,
+              image: recipe.image,
               ingredients: ingAndInst.ingredients,
               instructions: ingAndInst.instructions
             });
