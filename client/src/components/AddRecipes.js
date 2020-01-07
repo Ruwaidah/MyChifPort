@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addRecipe } from "../actions/index.js";
 
 function AddRecipes(props) {
+  const []
   console.log(props.user);
   const [img, setImage] = useState();
   const [values, setValues] = useState({
@@ -29,8 +30,8 @@ function AddRecipes(props) {
     // fd.append("image", img, img.name);
     // console.log(fd.append("image", img, img.name));
     reader.onload = e => {
-      console.log(e.target.result);
-      values.image = e.target.result;
+      // console.log(e.target.result);
+      // values.image = e.target.result.data;
       props.addRecipe(values, props.user.id);
     };
     values.image = img;
@@ -38,14 +39,14 @@ function AddRecipes(props) {
   console.log(img);
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="image">Image: </label>
+      <form onSubmit={onSubmit} encType="multipart/form-data">
+        {/* <label htmlFor="image">Image: </label>
         <input
           type="file"
           onChange={onImageChange}
           name="image"
           placeholder="image"
-        />
+        /> */}
         <label htmlFor="name">Recipe name: </label>
         <input
           onChange={onChange}
@@ -53,6 +54,11 @@ function AddRecipes(props) {
           name="recipe_name"
           placeholder="name"
         />
+                <label htmlFor="name">Meal Type: </label>
+                <select>
+                  <option></option>
+                </select>
+
         <label htmlFor="ingredients">ingredients: </label>
         <textarea
           onChange={onChange}

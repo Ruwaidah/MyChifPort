@@ -6,15 +6,14 @@ module.exports = {
 };
 
 function findUser(username) {
-  console.log(username);
   return db("users")
     .where({ username })
     .first();
 }
 
-function findById(ids) {
-  console.log(ids);
+function findById(id) {
+  console.log(id);
   return db("users")
-    .where({ id: ids })
+    .where({ id: id })
     .first();
 }

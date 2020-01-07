@@ -1,25 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+
 const Recipes = require("./recipes-model.js");
 const Users = require("../login/login-model");
-const storage = multer.diskStorage({
-  destination: "./uploads/",
-  filename: function(req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + Path.extname(file.originalname)
-    );
-  }
-});
-const upload = multer({
-  storage: storage
-}).single("image");
 
 // Get recipes for user
 router.get("/:id", (req, res) => {
-  Recipes.findRecipe(req.params.id)
+  Recipes.findRecipes(req.params.id)
     .then(recipes => {
+      console.log("try", recipes);
       res.status(200).json(recipes);
     })
     .catch(error => {
@@ -31,55 +20,53 @@ router.get("/:id", (req, res) => {
 
 // post new recipe
 router.post("/:id", (req, res) => {
-  upload(req, res, error => {
-    if (error) {
-      res.status(500).json({
-        message: "error adding the Image"
-      });
-    } else {
-      Users.findById(req.params.id)
-        .then(user => {
-          if (user) {
-            if (
-              req.body.recipe_name &&
-              req.body.ingredients &&
-              req.body.instructions
-            ) {
-              Recipes.addRecipe(req.body.recipe_name, req.file, req.params.id)
-                .then(id => {
-                  Recipes.addIngAndInst(req.body, id[0])
-                    .then(id =>
-                      res.status(200).json({ message: "added new recipe" })
-                    )
-                    .catch(error => {
-                      res.status(500).json({
-                        message: "error adding new recipe"
-                      });
-                    });
-                })
+  const { recipe_name, ingredients, instructions } = req.body;
+  Users.findById(req.params.id)
+    .then(user => {
+      console.log(user);
+      if (user) {
+        if (
+          req.body.recipe_name &&
+          req.body.ingredients &&
+          req.body.instructions
+        ) {
+          Recipes.addRecipe(
+            req.body.recipe_name,
+            req.body.mealtype,
+            req.params.id
+          )
+            .then(id => {
+              Recipes.addIngAndInst(req.body, id[0])
+                .then(id =>
+                  res.status(200).json({ message: "added new recipe" })
+                )
                 .catch(error => {
                   res.status(500).json({
-                    message: "error adding the recipe"
+                    message: "error adding new recipe"
                   });
                 });
-            } else {
-              res.status(404).json({
-                message: "missing some fields"
+            })
+            .catch(error => {
+              res.status(500).json({
+                message: "error adding the recipe"
               });
-            }
-          } else {
-            res.status(400).json({
-              message: "no user with this id"
             });
-          }
-        })
-        .catch(error => {
-          res.status(500).json({
-            message: "error getting the user"
+        } else {
+          res.status(404).json({
+            message: "missing some fields"
           });
+        }
+      } else {
+        res.status(400).json({
+          message: "no user with this id"
         });
-    }
-  });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "error getting the user"
+      });
+    });
 });
 
 // Delete recipe
@@ -136,7 +123,10 @@ router.put("/recipes/:id", (req, res) => {
           )
             .then(update => {
               Recipes.updateRecipe(
-                { recipe_name: req.body.recipe_name },
+                {
+                  recipe_name: req.body.recipe_name,
+                  meal_type_id: req.body.mealtype
+                },
                 req.params.id
               )
                 .then(updaerecipe => {
@@ -148,8 +138,10 @@ router.put("/recipes/:id", (req, res) => {
                   });
                 });
             })
-            .catch(error => {
-              res.status(500).json({ message: "error update recipe" });
+            .catch(erre => {
+              res.status(500).json({
+                message: "error update recipe ing"
+              });
             });
         } else {
           res.status(404).json({

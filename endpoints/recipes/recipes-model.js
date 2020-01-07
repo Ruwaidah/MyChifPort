@@ -7,21 +7,25 @@ module.exports = {
   addAllRecipes,
   recipeById,
   findIngAndInst,
-  findRecipe,
+  findRecipes,
   deleteIngAndInst,
   deleteRecipe,
   updateIngAndInst,
-  updateRecipe
+  updateRecipe,
+  findmealtype
 };
 
 function getAllRecipes() {
-  return db("recipes");
+  return db("recipes")
+    .select("recipes.id", "recipe_name", "mealtype", "username", "meal_type_id")
+    .join("meal_type", "meal_type_id", "meal_type.id")
+    .join("users", "user_id", "users.id");
 }
 
-function addRecipe(name, image, id) {
-  console.log(name, id);
+function addRecipe(name, meal_type_id, id) {
+  console.log(name, id, meal_type_id);
   return db("recipes").insert(
-    { recipe_name: name, user_id: id, image: image },
+    { recipe_name: name, user_id: id, meal_type_id: meal_type_id },
     "id"
   );
 }
@@ -41,15 +45,20 @@ function addAllRecipes() {
   return db("recipes");
 }
 
-function findRecipe(id) {
+function findRecipes(ids) {
   return db("recipes")
-    .select("id", "recipe_name ")
-    .where({ user_id: id });
+    .select("recipes.id", "recipe_name", "mealtype", "username", "meal_type_id")
+    .join("meal_type", "meal_type_id", "meal_type.id")
+    .join("users", "user_id", "users.id")
+    .where({ user_id: ids });
 }
 
 function recipeById(id) {
+  console.log(id);
   return db("recipes")
-    .where({ id })
+    .select("recipes.id", "recipe_name", "mealtype", "meal_type_id")
+    .join("meal_type", "meal_type_id", "meal_type.id")
+    .where({ "recipes.id": id })
     .first();
 }
 
@@ -81,4 +90,13 @@ function updateRecipe(data, id) {
   return db("recipes")
     .where({ id })
     .update(data);
+}
+
+// find mealType
+
+function findmealtype(id) {
+  console.log(id);
+  return db("meal_type")
+    .where({ id: id })
+    .first();
 }
