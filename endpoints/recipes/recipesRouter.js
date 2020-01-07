@@ -4,16 +4,18 @@ const multer = require("multer");
 const Recipes = require("./recipes-model.js");
 const Users = require("../login/login-model");
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, "./uploads/");
-  },
+  destination: "./uploads/",
   filename: function(req, file, cb) {
-    cb(null, file.filename);
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + Path.extname(file.originalname)
+    );
   }
 });
 const upload = multer({
   storage: storage
-});
+}).single("image");
+
 // Get recipes for user
 router.get("/:id", (req, res) => {
   Recipes.findRecipe(req.params.id)
@@ -28,20 +30,16 @@ router.get("/:id", (req, res) => {
 });
 
 // post new recipe
-router.post("/:id", upload.single("image"), (req, res) => {
-  console.log(req.params.id);
-  console.log(req.file);
+router.post("/:id", upload, (req, res) => {
   Users.findById(req.params.id)
     .then(user => {
-      console.log(user);
-
       if (user) {
         if (
           req.body.recipe_name &&
           req.body.ingredients &&
           req.body.instructions
         ) {
-          Recipes.addRecipe(req.body.recipe_name, req.body.image, req.params.id)
+          Recipes.addRecipe(req.body.recipe_name, req.file.path, req.params.id)
             .then(id => {
               Recipes.addIngAndInst(req.body, id[0])
                 .then(id =>
