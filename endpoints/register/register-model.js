@@ -12,6 +12,7 @@ function addUSer(user) {
 }
 
 function findUser(user) {
+  console.log(user);
   return db("users")
     .where({ username: user.username, email: user.email })
     .first();

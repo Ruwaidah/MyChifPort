@@ -28,18 +28,20 @@ router.get("/:id", (req, res) => {
 });
 
 // post new recipe
-router.post("/:id", upload.single("productImage"), (req, res) => {
+router.post("/:id", upload.single("image"), (req, res) => {
+  console.log(req.params.id);
   console.log(req.file);
-  const { recipe_name, ingredients, instructions } = req.body;
   Users.findById(req.params.id)
     .then(user => {
+      console.log(user);
+
       if (user) {
         if (
           req.body.recipe_name &&
           req.body.ingredients &&
           req.body.instructions
         ) {
-          Recipes.addRecipe(req.body.recipe_name, req.file.path, req.params.id)
+          Recipes.addRecipe(req.body.recipe_name, req.body.image, req.params.id)
             .then(id => {
               Recipes.addIngAndInst(req.body, id[0])
                 .then(id =>
@@ -56,12 +58,38 @@ router.post("/:id", upload.single("productImage"), (req, res) => {
                 message: "error adding the recipe"
               });
             });
+          // res.status(200).json({
+          //   message: "sfse"
+          // });
         } else {
           res.status(404).json({
             message: "missing some fields"
           });
         }
-      } else {
+      }
+
+      // Recipes.addRecipe(req.body.recipe_name, req.params.id)
+      //   .then(id => {
+      //     Recipes.addIngAndInst(req.body, id[0])
+      //       .then(id => res.status(200).json({ message: "added new recipe" }))
+      //       .catch(error => {
+      //         res.status(500).json({
+      //           message: "error adding new recipe"
+      //         });
+      //       });
+      //   })
+      // .catch(error => {
+      //   res.status(500).json({
+      //     message: "error adding the recipe"
+      //   });
+      // });
+      // } else {
+      //   res.status(404).json({
+      //     message: "missing some fields"
+      //   });
+      // }
+      // }
+      else {
         res.status(400).json({
           message: "no user with this id"
         });
