@@ -30,74 +30,60 @@ router.get("/:id", (req, res) => {
 });
 
 // post new recipe
-router.post("/:id", upload, (req, res) => {
-  Users.findById(req.params.id)
-    .then(user => {
-      if (user) {
-        if (
-          req.body.recipe_name &&
-          req.body.ingredients &&
-          req.body.instructions
-        ) {
-          Recipes.addRecipe(req.body.recipe_name, req.file.path, req.params.id)
-            .then(id => {
-              Recipes.addIngAndInst(req.body, id[0])
-                .then(id =>
-                  res.status(200).json({ message: "added new recipe" })
-                )
+router.post("/:id", (req, res) => {
+  upload(req, res, error => {
+    if (error) {
+      res.status(500).json({
+        message: "error adding the Image"
+      });
+    } else {
+      Users.findById(req.params.id)
+        .then(user => {
+          if (user) {
+            if (
+              req.body.recipe_name &&
+              req.body.ingredients &&
+              req.body.instructions
+            ) {
+              Recipes.addRecipe(
+                req.body.recipe_name,
+                req.file.path,
+                req.params.id
+              )
+                .then(id => {
+                  Recipes.addIngAndInst(req.body, id[0])
+                    .then(id =>
+                      res.status(200).json({ message: "added new recipe" })
+                    )
+                    .catch(error => {
+                      res.status(500).json({
+                        message: "error adding new recipe"
+                      });
+                    });
+                })
                 .catch(error => {
                   res.status(500).json({
-                    message: "error adding new recipe"
+                    message: "error adding the recipe"
                   });
                 });
-            })
-            .catch(error => {
-              res.status(500).json({
-                message: "error adding the recipe"
+            } else {
+              res.status(404).json({
+                message: "missing some fields"
               });
+            }
+          } else {
+            res.status(400).json({
+              message: "no user with this id"
             });
-          // res.status(200).json({
-          //   message: "sfse"
-          // });
-        } else {
-          res.status(404).json({
-            message: "missing some fields"
+          }
+        })
+        .catch(error => {
+          res.status(500).json({
+            message: "error getting the user"
           });
-        }
-      }
-
-      // Recipes.addRecipe(req.body.recipe_name, req.params.id)
-      //   .then(id => {
-      //     Recipes.addIngAndInst(req.body, id[0])
-      //       .then(id => res.status(200).json({ message: "added new recipe" }))
-      //       .catch(error => {
-      //         res.status(500).json({
-      //           message: "error adding new recipe"
-      //         });
-      //       });
-      //   })
-      // .catch(error => {
-      //   res.status(500).json({
-      //     message: "error adding the recipe"
-      //   });
-      // });
-      // } else {
-      //   res.status(404).json({
-      //     message: "missing some fields"
-      //   });
-      // }
-      // }
-      else {
-        res.status(400).json({
-          message: "no user with this id"
         });
-      }
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: "error getting the user"
-      });
-    });
+    }
+  });
 });
 
 // Delete recipe
@@ -166,8 +152,8 @@ router.put("/recipes/:id", (req, res) => {
                   });
                 });
             })
-            .catch(erre => {
-              message: "error update recipe";
+            .catch(error => {
+              res.status(500).json({ message: "error update recipe" });
             });
         } else {
           res.status(404).json({
