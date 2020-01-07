@@ -20,5 +20,6 @@ module.exports = server => {
       );
       return res.status(200).json({});
     }
+    next();
   });
 };
