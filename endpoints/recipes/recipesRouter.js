@@ -45,11 +45,7 @@ router.post("/:id", (req, res) => {
               req.body.ingredients &&
               req.body.instructions
             ) {
-              Recipes.addRecipe(
-                req.body.recipe_name,
-                req.file.path,
-                req.params.id
-              )
+              Recipes.addRecipe(req.body.recipe_name, req.file, req.params.id)
                 .then(id => {
                   Recipes.addIngAndInst(req.body, id[0])
                     .then(id =>
