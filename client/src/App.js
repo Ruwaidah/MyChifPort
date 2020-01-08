@@ -18,9 +18,18 @@ function App() {
   return (
     <div className="App">
       <PrivateRoute>
-        <Route path="/user" render={props => <DashBoard {...props} />} />
-        <AddRecipes />
+        <Route
+          exact
+          path="/user"
+          render={props => <DashBoard {...props} setViewLogin={setViewLogin} />}
+        />
+        <Route
+          path="/user/:id/create-recipe"
+          render={props => <AddRecipes {...props} />}
+        />
+        {/* <AddRecipes /> */}
       </PrivateRoute>
+
       <Route
         exact
         path="/"
@@ -32,10 +41,31 @@ function App() {
           />
         )}
       />
-      <Login setViewLogin={setViewLogin} viewLogin={viewLogin} />
+      <Route
+        exact
+        path="/"
+        render={props => (
+          <Login {...props} setViewLogin={setViewLogin} viewLogin={viewLogin} />
+        )}
+      />
+      <Route
+        exact
+        path="/"
+        render={props => (
+          <Register
+            {...props}
+            viewSignUp={viewSignUp}
+            setViewSignUp={setViewSignUp}
+          />
+        )}
+      />
+
       {/* <UpdateRecipe /> */}
-      <Register viewSignUp={viewSignUp} setViewSignUp={setViewSignUp} />
-      <Route path="/recipes/:id" render={props => <Recipe {...props} />} />
+      <Route
+        exact
+        path="/recipes/:id"
+        render={props => <Recipe {...props} />}
+      />
     </div>
   );
 }

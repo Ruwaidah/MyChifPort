@@ -70,6 +70,7 @@ function AddRecipes(props) {
           placeholder="instructions"
         />
         <button>Add</button>
+        <button onClick={() => props.history.goBack()}>Cancel</button>
       </form>
     </div>
   );

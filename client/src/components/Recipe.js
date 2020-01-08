@@ -24,6 +24,7 @@ function Recipe(props) {
   return (
     <div>
       <h1>Welcome</h1>
+      <img src={props.data.image} width="200px" />
       <h2>{props.data.recipe_name}</h2>
       <h6>{props.data.ingredients}</h6>
       <h6>{props.data.instructions}</h6>

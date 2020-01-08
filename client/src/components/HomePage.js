@@ -21,7 +21,6 @@ function HomePage(props) {
       <h1>Welcome</h1>
       <button onClick={login}>Login</button>
       <button onClick={signup}>Register</button>
-      <button onClick={() => sessionStorage.clear()}>logout</button>
       {props.recipes.map(recipe => (
         <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
           <h3>{recipe.recipe_name}</h3>

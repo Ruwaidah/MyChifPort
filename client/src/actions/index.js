@@ -4,9 +4,11 @@ export const LOADING = "LOADING";
 export const LOGIN_FETCH = "LOGIN_FETCH";
 export const FAILED = "FAILED";
 export const RECIPE_FETCH = "RECIPE_FETCH";
+export const USER_RECIPES = "USER_RECIPES";
 
 export const GLOBAL_RECIPES_FETCH = "GLOBAL_RECIPES_FETCH";
 
+// Get Global Recipes
 export const globalRecipes = () => dispatch => {
   dispatch({
     type: LOADING
@@ -28,6 +30,35 @@ export const globalRecipes = () => dispatch => {
     );
 };
 
+// Get User Recipes
+export const userRecipes = id => dispatch => {
+  const authAxios = axiosWithAuth();
+  console.log(sessionStorage.getItem("userid"));
+  dispatch({
+    type: LOADING
+  });
+  authAxios
+    .get(
+      `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
+        "userid"
+      )}`
+    )
+    .then(respo => {
+      console.log(respo);
+      dispatch({
+        type: USER_RECIPES,
+        payload: respo.data
+      });
+    })
+    .catch(error =>
+      dispatch({
+        type: FAILED,
+        payload: error
+      })
+    );
+};
+
+// Post Login
 export const loginUser = (user, history) => dispatch => {
   dispatch({
     type: LOADING
@@ -52,6 +83,7 @@ export const loginUser = (user, history) => dispatch => {
     );
 };
 
+// Post Signup
 export const signUp = values => dispatch => {
   console.log(values);
   axios
@@ -61,7 +93,6 @@ export const signUp = values => dispatch => {
 };
 
 // Add recipe
-
 export const addRecipe = (values, id) => dispatch => {
   console.log(sessionStorage.getItem("userid"));
   const authAxios = axiosWithAuth();

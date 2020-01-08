@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../actions/index.js";
 
 function Login(props) {
+  console.log(props);
   const [values, setValues] = useState({
     username: "",
     password: ""
