@@ -94,9 +94,7 @@ export const signUp = values => dispatch => {
 
 // Add recipe
 export const addRecipe = (values, id) => dispatch => {
-  console.log(sessionStorage.getItem("userid"));
   const authAxios = axiosWithAuth();
-  console.log(id);
   console.log(values);
   authAxios
     .post(`https://chefportfolio11.herokuapp.com/api/auth/user/3`, values)

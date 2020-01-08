@@ -6,6 +6,7 @@ import MealType from "./MealType.js";
 function AddRecipes(props) {
   const [mealType, setmealType] = useState();
   const [img, setImage] = useState();
+
   const [values, setValues] = useState({
     recipe_name: "",
     ingredients: "",
@@ -17,24 +18,28 @@ function AddRecipes(props) {
       [event.target.name]: event.target.value
     });
   };
-  console.log(mealType);
-
   const onImageChange = event => {
+    console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
 
   const onSubmit = event => {
     event.preventDefault();
+
     // const fd = new FormData();
     // fd.append("image", img, img.name);
     // console.log(fd.append("image", img, img.name));
-
+    var formdata = new FormData();
+    formdata.image = img;
+    formdata.recipe_name = values.recipe_name;
+    formdata.ingredients = values.ingredients;
+    formdata.instructions = values.instructions;
     // console.log(e.target.result);
     // values.image = e.target.result.data;
-    console.log(img);
-    values.mealtype = 1;
-    values.image = img;
-    props.addRecipe(values, props.user.id);
+    console.log(formdata);
+    formdata.mealtype = 1;
+    // values.image = formdata;
+    props.addRecipe({ values, formdata }, props.user.id);
   };
   console.log(mealType);
   return (

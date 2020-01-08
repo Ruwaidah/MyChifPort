@@ -36,29 +36,30 @@ router.get("/:id", (req, res) => {
 
 // post new recipe
 router.post("/:id", (req, res) => {
-  const { recipe_name, ingredients, instructions } = req.body;
+  console.log(req.files);
   Users.findById(req.params.id)
     .then(user => {
       if (user) {
         if (
-          req.body.recipe_name &&
-          req.body.ingredients &&
-          req.body.instructions
+          req.files.recipe_name &&
+          req.files.ingredients &&
+          req.files.instructions
         ) {
           imageupload(req.files).then(image => {
+            console.log("after", image);
             Recipes.uploadImage(image)
               .then(ids => {
                 Recipes.addRecipe(
                   ids[0],
-                  req.body.recipe_name,
-                  req.body.mealtype,
+                  req.files.recipe_name,
+                  req.files.mealtype,
                   req.params.id
                 )
                   .then(id => {
-                    Recipes.addIngAndInst(req.body, id[0])
-                      .then(id =>
-                        res.status(200).json({ message: "added new recipe" })
-                      )
+                    Recipes.addIngAndInst(req.files, id[0])
+                      .then(id => {
+                        res.status(200).json({ message: "added new recipe" });
+                      })
                       .catch(error => {
                         res.status(500).json({
                           message: "error adding new recipe"
