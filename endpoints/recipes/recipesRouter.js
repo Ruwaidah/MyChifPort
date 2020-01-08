@@ -46,30 +46,36 @@ router.post("/:id", (req, res) => {
           req.body.instructions
         ) {
           imageupload(req.files).then(image => {
-            Recipes.uploadImage(image).then(ids => {
-              Recipes.addRecipe(
-                ids[0],
-                req.body.recipe_name,
-                req.body.mealtype,
-                req.params.id
-              )
-                .then(id => {
-                  Recipes.addIngAndInst(req.body, id[0])
-                    .then(id =>
-                      res.status(200).json({ message: "added new recipe" })
-                    )
-                    .catch(error => {
-                      res.status(500).json({
-                        message: "error adding new recipe"
+            Recipes.uploadImage(image)
+              .then(ids => {
+                Recipes.addRecipe(
+                  ids[0],
+                  req.body.recipe_name,
+                  req.body.mealtype,
+                  req.params.id
+                )
+                  .then(id => {
+                    Recipes.addIngAndInst(req.body, id[0])
+                      .then(id =>
+                        res.status(200).json({ message: "added new recipe" })
+                      )
+                      .catch(error => {
+                        res.status(500).json({
+                          message: "error adding new recipe"
+                        });
                       });
+                  })
+                  .catch(error => {
+                    res.status(500).json({
+                      message: "error adding the recipe"
                     });
-                })
-                .catch(error => {
-                  res.status(500).json({
-                    message: "error adding the recipe"
                   });
+              })
+              .catch(error => {
+                res.status(500).status.json({
+                  message: "error upload the image"
                 });
-            });
+              });
           });
         } else {
           res.status(404).json({
