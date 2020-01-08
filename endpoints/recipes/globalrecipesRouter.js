@@ -21,18 +21,21 @@ router.get("/:id", (req, res) => {
   Recipes.recipeById(req.params.id)
     .then(recipe => {
       if (recipe) {
-        console.log(recipe);
         Recipes.findIngAndInst(recipe.id)
           .then(ingAndInst => {
             res.status(200).json({
+              id: recipe.id,
               recipe_name: recipe.recipe_name,
+              image: recipe.image,
+              mealtype: recipe.mealtype,
+              meal_type_id: recipe.meal_type_id,
               ingredients: ingAndInst.ingredients,
               instructions: ingAndInst.instructions
             });
           })
           .catch(error => {
-            res.status(500).json(error => {
-              message: "error getting the ingredients and instructions";
+            res.status(500).json({
+              message: "error getting the ingredients and instructions"
             });
           });
       } else {

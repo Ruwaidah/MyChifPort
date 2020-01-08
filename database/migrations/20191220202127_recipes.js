@@ -5,6 +5,10 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.string("mealtype", 100).notNullable();
     })
+    .createTable("images", tbl => {
+      tbl.increments();
+      tbl.string("image", 255);
+    })
 
     .createTable("recipes", tbl => {
       tbl.increments();
@@ -23,6 +27,11 @@ exports.up = function(knex) {
         .notNullable()
         .references("id")
         .inTable("meal_type");
+      tbl
+        .integer("image_id")
+        .unsigned()
+        .references("id")
+        .inTable("images");
       // .onUpdate("CASCADE")
       // .onDelete("RESTRICT");
     });
@@ -32,5 +41,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists("ing_inst")
     .dropTableIfExists("recipes")
-    .dropTableIfExists("meal_type");
+    .dropTableIfExists("images")
+    .dropTableIfExists("meal_type")
+    .dropTableIfExists("users");
 };

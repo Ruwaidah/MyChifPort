@@ -6,13 +6,20 @@ exports.seed = function(knex) {
       {
         recipe_name: "Thai Mango Coconut Pudding",
         user_id: 1,
-        meal_type_id: 1
+        meal_type_id: 1,
+        image_id: 2
       },
-      { recipe_name: "Healthy Turkey Tacos", user_id: 1, meal_type_id: 3 },
+      {
+        recipe_name: "Healthy Turkey Tacos",
+        user_id: 1,
+        meal_type_id: 3,
+        image_id: 1
+      },
       {
         recipe_name: "Healthy Dark Chocolate Milkshake",
         user_id: 2,
-        meal_type_id: 5
+        meal_type_id: 5,
+        image_id: 3
       }
     ]);
   });

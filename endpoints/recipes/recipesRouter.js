@@ -4,11 +4,27 @@ const router = express.Router();
 const Recipes = require("./recipes-model.js");
 const Users = require("../login/login-model");
 
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "donsjzduw",
+  api_key: "841792475544732",
+  api_secret: "ipOl0SDxScrO2a1Khv9QVHpjBm8"
+});
+
+// Upload the Image
+const imageupload = file => {
+  return cloudinary.uploader.upload(file.image.tempFilePath, function(
+    err,
+    result
+  ) {
+    return result;
+  });
+};
 // Get recipes for user
 router.get("/:id", (req, res) => {
   Recipes.findRecipes(req.params.id)
     .then(recipes => {
-      console.log("try", recipes);
       res.status(200).json(recipes);
     })
     .catch(error => {
@@ -23,34 +39,38 @@ router.post("/:id", (req, res) => {
   const { recipe_name, ingredients, instructions } = req.body;
   Users.findById(req.params.id)
     .then(user => {
-      console.log(user);
       if (user) {
         if (
           req.body.recipe_name &&
           req.body.ingredients &&
           req.body.instructions
         ) {
-          Recipes.addRecipe(
-            req.body.recipe_name,
-            req.body.mealtype,
-            req.params.id
-          )
-            .then(id => {
-              Recipes.addIngAndInst(req.body, id[0])
-                .then(id =>
-                  res.status(200).json({ message: "added new recipe" })
-                )
+          imageupload(req.files).then(image => {
+            Recipes.uploadImage(image).then(ids => {
+              Recipes.addRecipe(
+                ids[0],
+                req.body.recipe_name,
+                req.body.mealtype,
+                req.params.id
+              )
+                .then(id => {
+                  Recipes.addIngAndInst(req.body, id[0])
+                    .then(id =>
+                      res.status(200).json({ message: "added new recipe" })
+                    )
+                    .catch(error => {
+                      res.status(500).json({
+                        message: "error adding new recipe"
+                      });
+                    });
+                })
                 .catch(error => {
                   res.status(500).json({
-                    message: "error adding new recipe"
+                    message: "error adding the recipe"
                   });
                 });
-            })
-            .catch(error => {
-              res.status(500).json({
-                message: "error adding the recipe"
-              });
             });
+          });
         } else {
           res.status(404).json({
             message: "missing some fields"
@@ -65,6 +85,41 @@ router.post("/:id", (req, res) => {
     .catch(error => {
       res.status(500).json({
         message: "error getting the user"
+      });
+    });
+});
+
+// Delete recipe
+router.delete("/recipes/:id", (req, res) => {
+  Recipes.recipeById(req.params.id)
+    .then(recipe => {
+      if (recipe) {
+        Recipes.deleteIngAndInst(req.params.id)
+          .then(del => {
+            Recipes.deleteRecipe(req.params.id)
+              .then(dele => {
+                res.status(200).json({ message: "recipe deleted" });
+              })
+              .catch(error => {
+                res.status(500).json({
+                  message: "error deleting the recipe"
+                });
+              });
+          })
+          .catch(error => {
+            res.status(500).json({
+              message: "error deleting the recipe"
+            });
+          });
+      } else {
+        res.status(404).json({
+          message: "no recipe with this id"
+        });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "error deleting recipe"
       });
     });
 });

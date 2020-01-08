@@ -37,6 +37,7 @@ export const loginUser = (user, history) => dispatch => {
     .then(respo => {
       console.log(respo);
       sessionStorage.setItem("token", respo.data.token);
+      sessionStorage.setItem("userid", respo.data.user.id);
       dispatch({
         type: LOGIN_FETCH,
         payload: respo.data.user
@@ -62,11 +63,12 @@ export const signUp = values => dispatch => {
 // Add recipe
 
 export const addRecipe = (values, id) => dispatch => {
+  console.log(sessionStorage.getItem("userid"));
   const authAxios = axiosWithAuth();
   console.log(id);
   console.log(values);
   authAxios
-    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/${id}`, values)
+    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/3`, values)
     .then(respo => console.log(respo))
     .catch(error => console.log(error));
 };
