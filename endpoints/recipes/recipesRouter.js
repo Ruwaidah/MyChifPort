@@ -41,9 +41,9 @@ router.post("/:id", (req, res) => {
     .then(user => {
       if (user) {
         if (
-          req.files.recipe_name &&
-          req.files.ingredients &&
-          req.files.instructions
+          req.body.recipe_name &&
+          req.body.ingredients &&
+          req.body.instructions
         ) {
           imageupload(req.files).then(image => {
             console.log("after", image);
@@ -51,12 +51,12 @@ router.post("/:id", (req, res) => {
               .then(ids => {
                 Recipes.addRecipe(
                   ids[0],
-                  req.files.recipe_name,
-                  req.files.mealtype,
+                  req.body.recipe_name,
+                  req.body.mealtype,
                   req.params.id
                 )
                   .then(id => {
-                    Recipes.addIngAndInst(req.files, id[0])
+                    Recipes.addIngAndInst(req.body, id[0])
                       .then(id => {
                         res.status(200).json({ message: "added new recipe" });
                       })
