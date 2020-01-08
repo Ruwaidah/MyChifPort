@@ -37,9 +37,9 @@ function AddRecipes(props) {
     // console.log(e.target.result);
     // values.image = e.target.result.data;
     console.log(formdata);
-    formdata.mealtype = 1;
+    values.mealtype = 1;
     // values.image = formdata;
-    props.addRecipe(formdata, props.user.id);
+    props.addRecipe(values, props.user.id);
   };
   console.log(mealType);
   return (

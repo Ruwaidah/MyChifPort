@@ -34,6 +34,20 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// Post Image
+router.post("/image", (req, res) => {
+  console.log(req.files);
+  imageupload(req.files)
+    .then(image => {
+      Recipes.uploadImage(image).then(ids => res.status(200).json(ids));
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "error adding new recipe"
+      });
+    });
+});
+
 // post new recipe
 router.post("/:id", (req, res) => {
   console.log(req.files);

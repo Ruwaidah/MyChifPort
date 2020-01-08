@@ -93,7 +93,7 @@ export const signUp = values => dispatch => {
 };
 
 // Add recipe
-export const addRecipe = (values, id) => dispatch => {
+export const addRecipe = (values, image, id) => dispatch => {
   const authAxios = axiosWithAuth();
   console.log(values);
   authAxios
