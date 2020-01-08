@@ -5,7 +5,6 @@ import MealType from "./MealType.js";
 
 function AddRecipes(props) {
   const [mealType, setmealType] = useState();
-  console.log(props.user);
   const [img, setImage] = useState();
   const [values, setValues] = useState({
     recipe_name: "",
@@ -18,6 +17,7 @@ function AddRecipes(props) {
       [event.target.name]: event.target.value
     });
   };
+  console.log(mealType);
 
   const onImageChange = event => {
     setImage(event.target.files[0]);
@@ -31,14 +31,15 @@ function AddRecipes(props) {
 
     // console.log(e.target.result);
     // values.image = e.target.result.data;
-    values.mealtype = mealType;
+    console.log(img);
+    values.mealtype = 1;
     values.image = img;
     props.addRecipe(values, props.user.id);
   };
   console.log(mealType);
   return (
     <div>
-      <form onSubmit={onSubmit} encType="multipart/form-data">
+      <form onSubmit={onSubmit}>
         <label htmlFor="image">Image: </label>
         <input
           type="file"

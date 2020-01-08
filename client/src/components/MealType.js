@@ -9,11 +9,11 @@ function MealType(props) {
   };
   return (
     <select onChange={onChange}>
-      <option value="1">Breakfast</option>
-      <option value="2">Lunch</option>
-      <option value="3">Dinner</option>
-      <option value="4">snack</option>
-      <option value="5">Dessert </option>
+      <option value={1}>Breakfast</option>
+      <option value={2}>Lunch</option>
+      <option value={3}>Dinner</option>
+      <option value={4}>snack</option>
+      <option value={5}>Dessert </option>
     </select>
   );
 }
