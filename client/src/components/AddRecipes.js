@@ -28,11 +28,16 @@ function AddRecipes(props) {
     event.preventDefault();
     const formdata = new FormData();
 
-    if (img) formdata.append("image", img, img.name);
+    if (img) {
+      formdata.append("image", img, img.name);
+      values.mealtype = 1;
+      props.uploadImage(formdata, values);
+    } else {
+      values.mealtype = 1;
+      props.uploadImage(img, values);
+    }
 
-    values.mealtype = 1;
-    props.uploadImage(formdata, values);
-    values.formdata = formdata;
+    // values.formdata = formdata;
   };
   // console.log(mealType);
   return (

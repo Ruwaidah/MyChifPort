@@ -38,12 +38,15 @@ router.get("/:id", (req, res) => {
 router.post("/image", (req, res) => {
   if (!req.files || !req.files.image) {
     console.log("hihiuh");
-    const image =
-      "https://res.cloudinary.com/donsjzduw/image/upload/v1578521823/wh1oqdcgdippz11dkr3j.png";
+    const image = {
+      url:
+        "https://res.cloudinary.com/donsjzduw/image/upload/v1578521823/wh1oqdcgdippz11dkr3j.png"
+    };
     Recipes.uploadImage(image)
       .then(ids => res.status(200).json(ids[0]))
       .catch(erre => res.status.json({ message: "error upload image" }));
   } else {
+    console.log("else");
     imageupload(req.files)
       .then(image => {
         Recipes.uploadImage(image).then(ids => res.status(200).json(ids[0]));

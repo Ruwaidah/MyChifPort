@@ -128,6 +128,7 @@ function findmealtype(id) {
 // Get Images
 
 function uploadImage(image) {
+  console.log(image);
   return db("images").insert({ image: image.url }, "id");
 }
 
