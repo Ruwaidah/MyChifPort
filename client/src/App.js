@@ -60,11 +60,16 @@ function App() {
         )}
       />
 
-      {/* <UpdateRecipe /> */}
+      <Route
+        exact
+        path="/edite"
+        render={props => <UpdateRecipe {...props} />}
+      />
+
       <Route
         exact
         path="/recipes/:id"
-        render={props => <Recipe {...props} />}
+        render={props => <Recipe {...props} setViewLogin={setViewLogin} />}
       />
     </div>
   );

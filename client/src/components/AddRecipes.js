@@ -5,6 +5,7 @@ import MealType from "./MealType.js";
 import { axiosWithAuth } from "./axiosWithuth.js";
 
 function AddRecipes(props) {
+  console.log("useris", props.match.params.id);
   const [mealType, setmealType] = useState();
   const [img, setImage] = useState();
 
@@ -27,10 +28,10 @@ function AddRecipes(props) {
     event.preventDefault();
     const formdata = new FormData();
     formdata.append("image", img, img.name);
-    values.mealtype = mealType;
-    // props.uploadImage(formdata);
+    values.mealtype = 1;
+    props.uploadImage(formdata, values);
     values.formdata = formdata;
-    props.addRecipe(values, props.user.id);
+    // props.addRecipe(values, props.match.params.id);
   };
   // console.log(mealType);
   return (
@@ -66,8 +67,8 @@ function AddRecipes(props) {
           name="instructions"
           placeholder="instructions"
         />
-        <button>Add</button>
-        <button onClick={() => props.history.goBack()}>Cancel</button>
+        <button type="submit">Add</button>
+        <button onClick={() => props.history.push("/user")}>Cancel</button>
       </form>
     </div>
   );

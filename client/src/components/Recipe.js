@@ -12,13 +12,6 @@ function Recipe(props) {
     props.recipeById(props.match.params.id);
   }, []);
 
-  const login = event => {
-    props.setViewLogin(true);
-  };
-
-  const signup = event => {
-    props.setViewSignUp(true);
-  };
   if (props.isloading || !props.data) return <h3>Loading</h3>;
 
   return (
@@ -29,8 +22,8 @@ function Recipe(props) {
       <h6>{props.data.ingredients}</h6>
       <h6>{props.data.instructions}</h6>
 
-      <button onClick={login}>edite</button>
-      <button onClick={signup}>delete</button>
+      <Link to="/edite">edite</Link>
+      <button>delete</button>
     </div>
   );
 }
