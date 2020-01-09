@@ -40,7 +40,7 @@ router.post("/image", (req, res) => {
     console.log("hihiuh");
     const image = {
       url:
-        "https://res.cloudinary.com/donsjzduw/image/upload/v1578521823/wh1oqdcgdippz11dkr3j.png"
+        "https://res.cloudinary.com/donsjzduw/image/upload/v1578579527/kn0gzemksbkmnwknh6q1.png"
     };
     Recipes.uploadImage(image)
       .then(ids => res.status(200).json(ids[0]))
