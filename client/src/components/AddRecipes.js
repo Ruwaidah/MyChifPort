@@ -27,15 +27,9 @@ function AddRecipes(props) {
   const onSubmit = async event => {
     event.preventDefault();
     const formdata = new FormData();
-
-    if (img) {
-      formdata.append("image", img, img.name);
-      values.mealtype = 1;
-      props.uploadImage(formdata, values);
-    } else {
-      values.mealtype = 1;
-      props.uploadImage(img, values);
-    }
+    if (img) formdata.append("image", img, img.name);
+    values.mealtype = 1;
+    props.uploadImage(formdata, values);
 
     // values.formdata = formdata;
   };
