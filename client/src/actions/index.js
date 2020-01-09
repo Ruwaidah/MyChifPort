@@ -94,11 +94,22 @@ export const signUp = values => dispatch => {
 
 // Add recipe
 export const addRecipe = (values, image, id) => dispatch => {
+  values.image = image;
   const authAxios = axiosWithAuth();
   console.log(values);
   authAxios
-    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/3`, values)
+    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/${id}`, values)
     .then(respo => console.log(respo))
+    .catch(error => console.log(error));
+};
+
+// Upload Image
+export const uploadImage = (image, values, id) => dispatch => {
+  console.log(image);
+  const authAxios = axiosWithAuth();
+  authAxios
+    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/image`, image)
+    .then(imageId => addRecipe(values, imageId, id))
     .catch(error => console.log(error));
 };
 

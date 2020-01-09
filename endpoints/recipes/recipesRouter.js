@@ -36,16 +36,24 @@ router.get("/:id", (req, res) => {
 
 // Post Image
 router.post("/image", (req, res) => {
-  console.log(req.files);
-  imageupload(req.files)
-    .then(image => {
-      Recipes.uploadImage(image).then(ids => res.status(200).json(ids));
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: "error adding new recipe"
+  if (!req.files) {
+    console.log("hihiuh");
+    const image =
+      "https://res.cloudinary.com/donsjzduw/image/upload/v1578521823/wh1oqdcgdippz11dkr3j.png";
+    Recipes.uploadImage(image)
+      .then(ids => res.status(200).json(ids[0]))
+      .catch(erre => res.status.json({ message: "error upload image" }));
+  } else {
+    imageupload(req.files)
+      .then(image => {
+        Recipes.uploadImage(image).then(ids => res.status(200).json(ids[0]));
+      })
+      .catch(error => {
+        res.status(500).json({
+          message: "error adding new recipe"
+        });
       });
-    });
+  }
 });
 
 // post new recipe
@@ -59,39 +67,28 @@ router.post("/:id", (req, res) => {
           req.body.ingredients &&
           req.body.instructions
         ) {
-          imageupload(req.files).then(image => {
-            console.log("after", image);
-            Recipes.uploadImage(image)
-              .then(ids => {
-                Recipes.addRecipe(
-                  ids[0],
-                  req.body.recipe_name,
-                  req.body.mealtype,
-                  req.params.id
-                )
-                  .then(id => {
-                    Recipes.addIngAndInst(req.body, id[0])
-                      .then(id => {
-                        res.status(200).json({ message: "added new recipe" });
-                      })
-                      .catch(error => {
-                        res.status(500).json({
-                          message: "error adding new recipe"
-                        });
-                      });
-                  })
-                  .catch(error => {
-                    res.status(500).json({
-                      message: "error adding the recipe"
-                    });
+          Recipes.addRecipe(
+            req.body.image,
+            req.body.recipe_name,
+            req.body.mealtype,
+            req.params.id
+          )
+            .then(id => {
+              Recipes.addIngAndInst(req.body, id[0])
+                .then(id => {
+                  res.status(200).json({ message: "added new recipe" });
+                })
+                .catch(error => {
+                  res.status(500).json({
+                    message: "error adding new recipe"
                   });
-              })
-              .catch(error => {
-                res.status(500).status.json({
-                  message: "error upload the image"
                 });
+            })
+            .catch(error => {
+              res.status(500).json({
+                message: "error adding the recipe"
               });
-          });
+            });
         } else {
           res.status(404).json({
             message: "missing some fields"

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addRecipe } from "../actions/index.js";
+import { addRecipe, uploadImage } from "../actions/index.js";
 import MealType from "./MealType.js";
+import { axiosWithAuth } from "./axiosWithuth.js";
 
 function AddRecipes(props) {
   const [mealType, setmealType] = useState();
@@ -19,29 +20,19 @@ function AddRecipes(props) {
     });
   };
   const onImageChange = event => {
-    console.log(event.target.files[0]);
     setImage(event.target.files[0]);
   };
 
-  const onSubmit = event => {
+  const onSubmit = async event => {
     event.preventDefault();
-
-    // const fd = new FormData();
-    // fd.append("image", img, img.name);
-    // console.log(fd.append("image", img, img.name));
-    var formdata = new FormData();
-    formdata.image = img;
-    formdata.recipe_name = values.recipe_name;
-    formdata.ingredients = values.ingredients;
-    formdata.instructions = values.instructions;
-    // console.log(e.target.result);
-    // values.image = e.target.result.data;
-    console.log(formdata);
-    values.mealtype = 1;
-    // values.image = formdata;
+    const formdata = new FormData();
+    formdata.append("image", img, img.name);
+    values.mealtype = mealType;
+    // props.uploadImage(formdata);
+    values.formdata = formdata;
     props.addRecipe(values, props.user.id);
   };
-  console.log(mealType);
+  // console.log(mealType);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -89,4 +80,4 @@ const mapStatetoProps = state => {
   };
 };
 
-export default connect(mapStatetoProps, { addRecipe })(AddRecipes);
+export default connect(mapStatetoProps, { addRecipe, uploadImage })(AddRecipes);
