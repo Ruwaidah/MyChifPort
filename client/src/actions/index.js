@@ -145,15 +145,13 @@ export const recipeById = id => dispatch => {
 };
 
 // Update Recipe
-export const updateRecipe = values => dispatch => {
+export const updateRecipe = (values, id) => dispatch => {
   console.log(values);
   const authAxios = axiosWithAuth();
 
   authAxios
     .put(
-      `https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${sessionStorage.getItem(
-        "userid"
-      )}`,
+      `https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${id}`,
       values
     )
     .then(respo => {

@@ -36,7 +36,7 @@ router.get("/:id", (req, res) => {
 
 // Post Image
 router.post("/image", (req, res) => {
-  if (!req.files) {
+  if (!req.files || !req.files.image) {
     console.log("hihiuh");
     const image =
       "https://res.cloudinary.com/donsjzduw/image/upload/v1578521823/wh1oqdcgdippz11dkr3j.png";
@@ -103,41 +103,6 @@ router.post("/:id", (req, res) => {
     .catch(error => {
       res.status(500).json({
         message: "error getting the user"
-      });
-    });
-});
-
-// Delete recipe
-router.delete("/recipes/:id", (req, res) => {
-  Recipes.recipeById(req.params.id)
-    .then(recipe => {
-      if (recipe) {
-        Recipes.deleteIngAndInst(req.params.id)
-          .then(del => {
-            Recipes.deleteRecipe(req.params.id)
-              .then(dele => {
-                res.status(200).json({ message: "recipe deleted" });
-              })
-              .catch(error => {
-                res.status(500).json({
-                  message: "error deleting the recipe"
-                });
-              });
-          })
-          .catch(error => {
-            res.status(500).json({
-              message: "error deleting the recipe"
-            });
-          });
-      } else {
-        res.status(404).json({
-          message: "no recipe with this id"
-        });
-      }
-    })
-    .catch(error => {
-      res.status(500).json({
-        message: "error deleting recipe"
       });
     });
 });

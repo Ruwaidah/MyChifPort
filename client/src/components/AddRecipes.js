@@ -27,11 +27,12 @@ function AddRecipes(props) {
   const onSubmit = async event => {
     event.preventDefault();
     const formdata = new FormData();
-    formdata.append("image", img, img.name);
+
+    if (img) formdata.append("image", img, img.name);
+
     values.mealtype = 1;
     props.uploadImage(formdata, values);
     values.formdata = formdata;
-    // props.addRecipe(values, props.match.params.id);
   };
   // console.log(mealType);
   return (

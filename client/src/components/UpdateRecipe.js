@@ -21,7 +21,7 @@ function UpdateRecipe(props) {
   console.log(values);
   const onSubmit = event => {
     event.preventDefault();
-    props.updateRecipe(values, props.history);
+    props.updateRecipe(values, props.data.id);
   };
 
   return (
@@ -38,7 +38,7 @@ function UpdateRecipe(props) {
         />{" "}
         <select
           value={props.data.meal_type_id}
-          handleChange={handleChange}
+          onChange={handleChange}
           name="mealtype"
         >
           {mealType.map((meal, index) => (
@@ -64,7 +64,7 @@ function UpdateRecipe(props) {
           onChange={handleChange}
         />
         <button type="submit">Edite</button>
-        <button onClick={() => props.setViewLogin(false)}>Cancel</button>
+        <button onClick={() => props.history.goBack()}>Cancel</button>
       </form>
     </div>
   );
