@@ -4,7 +4,8 @@ import {
   FAILED,
   LOGIN_FETCH,
   RECIPE_FETCH,
-  USER_RECIPES
+  USER_RECIPES,
+  ADDING_RECIPE
 } from "../actions/index.js";
 
 const initiallstate = {
@@ -61,6 +62,10 @@ export const rootReducer = (state = initiallstate, actions) => {
         userRecipes: actions.payload,
         isloading: false,
         error: null
+      };
+    case ADDING_RECIPE:
+      return {
+        ...state
       };
     default:
       return state;

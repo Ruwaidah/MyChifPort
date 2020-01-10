@@ -8,13 +8,16 @@ function MealType(props) {
     props.setmealType(e.target.value);
   };
   return (
-    <select onChange={onChange}>
-      <option value={1}>Breakfast</option>
-      <option value={2}>Lunch</option>
-      <option value={3}>Dinner</option>
-      <option value={4}>snack</option>
-      <option value={5}>Dessert </option>
-    </select>
+    <div className="field">
+      <span>Meal Type:</span>
+      <select onChange={onChange}>
+        <option value={1}>Breakfast</option>
+        <option value={2}>Lunch</option>
+        <option value={3}>Dinner</option>
+        <option value={4}>snack</option>
+        <option value={5}>Dessert </option>
+      </select>
+    </div>
   );
 }
 

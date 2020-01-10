@@ -27,44 +27,56 @@ function UpdateRecipe(props) {
   return (
     <div>
       <h4>Update Recipe</h4>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="recipe_name">recipe_name: </label>
-        <input
-          value={values.recipe_name}
-          type="text"
-          name="recipe_name"
-          placeholder="recipe_name"
-          onChange={handleChange}
-        />{" "}
-        <select
-          value={props.data.meal_type_id}
-          onChange={handleChange}
-          name="mealtype"
-        >
-          {mealType.map((meal, index) => (
-            <option key={index} value={index + 1}>
-              {meal}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="ingredients">ingredients: </label>
-        <input
-          value={values.ingredients}
-          type="ingredients"
-          name="ingredients"
-          placeholder="ingredients"
-          onChange={handleChange}
-        />
-        <label htmlFor="instructions">ingredients: </label>
-        <input
-          value={values.instructions}
-          type="instructions"
-          name="instructions"
-          placeholder="instructions"
-          onChange={handleChange}
-        />
-        <button type="submit">Edite</button>
-        <button onClick={() => props.history.goBack()}>Cancel</button>
+      <form onSubmit={onSubmit} className="create-form">
+        <div className="field">
+          <label htmlFor="recipe_name">recipe_name: </label>
+          <input
+            value={values.recipe_name}
+            type="text"
+            name="recipe_name"
+            placeholder="recipe_name"
+            onChange={handleChange}
+          />{" "}
+        </div>
+        <div className="field">
+          <span>Meal Type:</span>
+
+          <select
+            value={props.data.meal_type_id}
+            onChange={handleChange}
+            name="mealtype"
+          >
+            {mealType.map((meal, index) => (
+              <option key={index} value={index + 1}>
+                {meal}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label htmlFor="ingredients">ingredients: </label>
+          <input
+            value={values.ingredients}
+            type="ingredients"
+            name="ingredients"
+            placeholder="ingredients"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="instructions">ingredients: </label>
+          <input
+            value={values.instructions}
+            type="instructions"
+            name="instructions"
+            placeholder="instructions"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="field create-btns">
+          <button type="submit">Edite</button>
+          <button onClick={() => props.history.goBack()}>Cancel</button>
+        </div>
       </form>
     </div>
   );

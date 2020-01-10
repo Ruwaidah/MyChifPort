@@ -41,7 +41,6 @@ function App() {
           path="/user/:id/create-recipe"
           render={props => <AddRecipes {...props} />}
         />
-        {/* <AddRecipes /> */}
       </PrivateRoute>
 
       <Route

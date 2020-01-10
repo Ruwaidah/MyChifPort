@@ -5,7 +5,7 @@ import Image from "../FoodLogo.png";
 function Footer(props) {
   return (
     <div className="footer">
-      <p> all right reserve 2020</p>
+      <p> all right reserved 2020 &copy;</p>
     </div>
   );
 }

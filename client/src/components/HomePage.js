@@ -10,7 +10,13 @@ function HomePage(props) {
     props.globalRecipes();
   }, []);
 
-  if (props.isloading) return <h3>Loading</h3>;
+  if (props.isloading)
+    return (
+      <div id="loading">
+        {" "}
+        <h3>Loading</h3>{" "}
+      </div>
+    );
   return (
     <div
       className={
@@ -24,7 +30,7 @@ function HomePage(props) {
       {props.recipes.map(recipe => (
         <div key={recipe.id} className="recipeCard">
           <Link to={`/recipes/${recipe.id}`}>
-            <img src={recipe.image} width="200px" />
+            <img src={recipe.image} width="350px" height="290px" />
             <h3>{recipe.recipe_name}</h3>
             <h5>{recipe.mealtype}</h5>
           </Link>

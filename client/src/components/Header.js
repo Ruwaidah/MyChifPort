@@ -33,8 +33,12 @@ function Header(props) {
         </button>
       ) : (
         <div className="headerbtns">
-          <button onClick={login}>Login</button>
-          <button onClick={signup}>Register</button>{" "}
+          <button onClick={login} className="loginhover">
+            Login
+          </button>
+          <button onClick={signup} className="loginhover">
+            Register
+          </button>{" "}
         </div>
       )}
     </div>

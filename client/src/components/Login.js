@@ -25,22 +25,28 @@ function Login(props) {
       <div className="loginform">
         <h4>LogIn</h4>
         <form onSubmit={onSubmit}>
-          <label htmlFor="username">Username: </label>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            onChange={handleChange}
-          />{" "}
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            onChange={handleChange}
-          />
-          <button type="submit">Login</button>
-          <button onClick={() => props.setViewLogin(false)}>Cancel</button>
+          <div className="field">
+            <label htmlFor="username">Username: </label>
+            <input
+              type="text"
+              name="username"
+              placeholder="username"
+              onChange={handleChange}
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="password">Password: </label>
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="loginbtn">
+            <button type="submit">Login</button>
+            <button onClick={() => props.setViewLogin(false)}>Cancel</button>
+          </div>
         </form>
       </div>
     );

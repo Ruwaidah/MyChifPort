@@ -5,6 +5,7 @@ export const LOGIN_FETCH = "LOGIN_FETCH";
 export const FAILED = "FAILED";
 export const RECIPE_FETCH = "RECIPE_FETCH";
 export const USER_RECIPES = "USER_RECIPES";
+export const ADDING_RECIPE = "ADDING_RECIPE";
 
 export const GLOBAL_RECIPES_FETCH = "GLOBAL_RECIPES_FETCH";
 
@@ -92,30 +93,15 @@ export const signUp = values => dispatch => {
     .catch(error => console.log(error));
 };
 
-// // Add recipe
-// export const addRecipe = (values, image, id) => dispatch => {
-//   values.image = image;
-//   const authAxios = axiosWithAuth();
-//   console.log(values, image, id);
-//   authAxios
-//     .post(
-//       `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
-//         "userid"
-//       )}`,
-//       values
-//     )
-//     .then(respo => console.log(respo))
-//     .catch(error => console.log(error));
-// };
-
 // Add Recipe
-export const addRecipe = (image, values, id) => dispatch => {
-  console.log(id);
+export const addRecipe = (image, values, history) => dispatch => {
+  dispatch({
+    type: LOADING
+  });
   const authAxios = axiosWithAuth();
   authAxios
     .post(`https://chefportfolio11.herokuapp.com/api/auth/user/image`, image)
     .then(imageId => {
-      console.log("cdewfdew", imageId);
       values.image = imageId.data;
 
       authAxios
@@ -125,7 +111,10 @@ export const addRecipe = (image, values, id) => dispatch => {
           )}`,
           values
         )
-        .then(respo => console.log(respo));
+        .then(respo => {
+          dispatch({ type: ADDING_RECIPE, payload: respo });
+          history.push("/user");
+        });
       // addRecipe(values, imageId, id);
     })
     .catch(error => console.log(error));
@@ -151,7 +140,6 @@ export const recipeById = id => dispatch => {
 
 // Update Recipe
 export const updateRecipe = (values, id) => dispatch => {
-  console.log(values);
   const authAxios = axiosWithAuth();
 
   authAxios
@@ -162,5 +150,15 @@ export const updateRecipe = (values, id) => dispatch => {
     .then(respo => {
       console.log(respo);
     })
+    .catch(error => console.log(error));
+};
+
+// Delete Recipe
+export const deleteRecipe = id => dispatch => {
+  const authAxios = axiosWithAuth();
+
+  authAxios
+    .delete(`https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${id}`)
+    .then(respo => console.log(respo))
     .catch(error => console.log(error));
 };

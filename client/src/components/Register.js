@@ -28,81 +28,104 @@ function Register(props) {
   };
   if (props.viewSignUp)
     return (
-      <div className="loginform">
+      <div className="loginform" id="signupform">
         <h4>Register</h4>
-        <form onSubmit={onSubmit}>
-          <label htmlFor="firstname">firstname: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="firstname"
-            placeholder="firstname"
-          />
-          <label htmlFor="lastname">lastname: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="lastname"
-            placeholder="lastname"
-          />
-          <label htmlFor="username">Username: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="username"
-            placeholder="username"
-          />
-          <label htmlFor="password">Password: </label>
-          <input
-            onChange={onChange}
-            type="password"
-            name="password"
-            placeholder="password"
-          />
-          <label htmlFor="email">Email: </label>
-          <input
-            onChange={onChange}
-            type="email"
-            name="email"
-            placeholder="email"
-          />
-          <label htmlFor="state">State: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="state"
-            placeholder="state"
-          />
-          <label htmlFor="city">City: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="city"
-            placeholder="city"
-          />
-          <label htmlFor="address">Address: </label>
-          <input
-            onChange={onChange}
-            type="text"
-            name="address"
-            placeholder="address"
-          />
-          <label htmlFor="phone">Phone: </label>
-          <input
-            onChange={onChange}
-            type="number"
-            name="phone"
-            placeholder="phone"
-          />
-          <label htmlFor="zipcode">zipcode: </label>
-          <input
-            onChange={onChange}
-            type="number"
-            name="zipcode"
-            placeholder="zipcode"
-          />
-          <button type="submit">Register</button>
-          <button onClick={() => props.setViewSignUp(false)}>Cancel</button>
+        <form onSubmit={onSubmit} id="signup">
+          <div className="field">
+            <label htmlFor="firstname">firstname: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="firstname"
+              placeholder="firstname"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="lastname">lastname: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="lastname"
+              placeholder="lastname"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="username">Username: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="username"
+              placeholder="username"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="password">Password: </label>
+            <input
+              onChange={onChange}
+              type="password"
+              name="password"
+              placeholder="password"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="email">Email: </label>
+            <input
+              onChange={onChange}
+              type="email"
+              name="email"
+              placeholder="email"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="state">State: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="state"
+              placeholder="state"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="city">City: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="city"
+              placeholder="city"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="address">Address: </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="address"
+              placeholder="address"
+            />
+          </div>{" "}
+          <div className="field">
+            <label htmlFor="phone">Phone: </label>
+            <input
+              onChange={onChange}
+              type="number"
+              name="phone"
+              placeholder="phone"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="zipcode">zipcode: </label>
+            <input
+              onChange={onChange}
+              type="number"
+              name="zipcode"
+              placeholder="zipcode"
+            />
+          </div>{" "}
+          <br />
+          <div className="loginbtn">
+            <button type="submit">Register</button>
+            <button onClick={() => props.setViewSignUp(false)}>Cancel</button>
+          </div>
         </form>
       </div>
     );
