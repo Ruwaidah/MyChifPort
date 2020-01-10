@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import HomePage from "./components/HomePage.js";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import PrivateRoute from "./components/PrivateRoute.js";
@@ -10,6 +10,8 @@ import DashBoard from "./components/DashBoard.js";
 import AddRecipes from "./components/AddRecipes.js";
 import UpdateRecipe from "./components/UpdateRecipe";
 import Recipe from "./components/Recipe";
+import Header from "./components/Header";
+import Footer from "./components/Footer.js";
 
 function App() {
   const [viewLogin, setViewLogin] = useState(false);
@@ -17,7 +19,19 @@ function App() {
 
   return (
     <div className="App">
-      <PrivateRoute>
+      <Route
+        path="/"
+        render={props => (
+          <Header
+            setViewLogin={setViewLogin}
+            setViewSignUp={setViewSignUp}
+            viewLogin={viewLogin}
+            viewSignUp={viewSignUp}
+            {...props}
+          />
+        )}
+      />
+      <PrivateRoute path="/">
         <Route
           exact
           path="/user"
@@ -37,6 +51,8 @@ function App() {
           <HomePage
             setViewLogin={setViewLogin}
             setViewSignUp={setViewSignUp}
+            viewLogin={viewLogin}
+            viewSignUp={viewSignUp}
             {...props}
           />
         )}
@@ -71,6 +87,7 @@ function App() {
         path="/recipes/:id"
         render={props => <Recipe {...props} setViewLogin={setViewLogin} />}
       />
+      <Route path="/" render={props => <Footer {...props} />} />
     </div>
   );
 }

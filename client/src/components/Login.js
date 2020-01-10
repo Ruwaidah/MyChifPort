@@ -15,13 +15,14 @@ function Login(props) {
     });
   };
   const onSubmit = event => {
+    props.setViewLogin(false);
     event.preventDefault();
     props.loginUser(values, props.history);
   };
   if (!props.viewLogin) return null;
   if (props.viewLogin)
     return (
-      <div>
+      <div className="loginform">
         <h4>LogIn</h4>
         <form onSubmit={onSubmit}>
           <label htmlFor="username">Username: </label>

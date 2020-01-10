@@ -1,30 +1,34 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { globalRecipes } from "../actions/index.js";
 import { register } from "../serviceWorker.js";
 
 function HomePage(props) {
+  console.log(props.viewLogin);
   useEffect(() => {
     props.globalRecipes();
   }, []);
-  const login = event => {
-    props.setViewLogin(true);
-  };
 
-  const signup = event => {
-    props.setViewSignUp(true);
-  };
   if (props.isloading) return <h3>Loading</h3>;
   return (
-    <div>
-      <h1>Welcome</h1>
-      <button onClick={login}>Login</button>
-      <button onClick={signup}>Register</button>
+    <div
+      className={
+        props.viewLogin || props.viewSignUp
+          ? "foggy recipes-container"
+          : "recipes-container"
+      }
+    >
+      {sessionStorage.getItem("token") ? <Redirect to="/user" /> : null}
+
       {props.recipes.map(recipe => (
-        <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
-          <h3>{recipe.recipe_name}</h3>
-        </Link>
+        <div key={recipe.id} className="recipeCard">
+          <Link to={`/recipes/${recipe.id}`}>
+            <img src={recipe.image} width="200px" />
+            <h3>{recipe.recipe_name}</h3>
+            <h5>{recipe.mealtype}</h5>
+          </Link>
+        </div>
       ))}
     </div>
   );

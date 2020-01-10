@@ -1,31 +1,140 @@
 .App {
   text-align: center;
+  background: black;
+  max-width: 1500px;
+  margin: 0 auto;
+  min-height: 100vh;
+  color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*  Header */
+.header {
+  position: relative;
+
+  font-family: "Bad Script", sans-serif;
+  margin: 0;
+
+  border-bottom: whitesmoke 1px solid;
+  box-shadow: whitesmoke 5px 1px 10px;
+}
+
+.header .headerbtns {
+  margin: 0;
+  width: 300px;
+  position: absolute;
+  right: 40px;
+  top: 80px;
+}
+
+.header .headerbtns button,
+.logout {
+  margin-right: 50px;
+  color: whitesmoke;
+  background: none;
+  border: none;
+  font-size: 30px;
+  text-shadow: whitesmoke 1px 2px 14px;
+  font-family: "Aladin", "Bad Script", sans-serif;
+  outline: none;
+}
+
+.loginform {
+  background: whitesmoke;
+  border-radius: 3px;
+  position: fixed;
+  width: 500px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  animation: fadeIn 0.6s;
+}
+
+.foggy {
+  filter: blur(3px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Recipe Card */
+.recipeCard {
+  border-radius: 3px;
+  margin-bottom: 50px;
+  width: 300px;
+  border: whitesmoke 1px solid;
+  box-shadow: grey 5px 0.5px 25px;
+  padding: 10px;
+}
+
+.recipeCard h3,
+.recipeCard img {
+  margin: 0;
+}
+
+.recipeCard h3 {
+  color: white;
+}
+.recipeCard a {
+  text-decoration: none;
+  color: white;
+}
+
+/* recipes-container */
+.recipes-container {
+  margin-top: 80px;
+  min-height: 80vh;
+  justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* recipe Page */
+.recipePage {
+  margin: 0 auto;
+  width: 900px;
+  min-height: 80vh;
+}
+
+.recipePage h2 {
+  font-family: "Alegreya SC", serif;
+  font-size: 30px;
+  margin-bottom: 70px;
+}
+
+.recipecotent {
+  /* margin-top: 30px;
+  margin-bottom: 50px; */
+  font-family: "Alegreya SC", serif;
+
+  padding-bottom: 50px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.recipecotent span {
+  font-weight: 500;
+  font-size: 30px;
+}
+.recipecotent p {
+  font-size: 25px;
+  margin: 0;
+
+  margin-left: 50px;
+  text-align: start;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +144,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Footer */
+
+.footer {
+  border-top: whitesmoke 1px solid;
+  box-shadow: whitesmoke 5px 1px 10px;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
 }

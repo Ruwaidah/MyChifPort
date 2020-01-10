@@ -4,15 +4,15 @@ import { signUp } from "../actions/index.js";
 
 function Register(props) {
   const [values, setValues] = useState({
-    username: "",
-    firstname: "",
-    lastname: "",
-    password: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    state: ""
+    username: null,
+    firstname: null,
+    lastname: null,
+    password: null,
+    email: null,
+    phone: null,
+    address: null,
+    city: null,
+    state: null
   });
   const onChange = event => {
     setValues({
@@ -23,12 +23,12 @@ function Register(props) {
 
   const onSubmit = event => {
     event.preventDefault();
-    console.log(values);
+    props.setViewSignUp(false);
     props.signUp(values);
   };
   if (props.viewSignUp)
     return (
-      <div>
+      <div className="loginform">
         <h4>Register</h4>
         <form onSubmit={onSubmit}>
           <label htmlFor="firstname">firstname: </label>
@@ -101,7 +101,7 @@ function Register(props) {
             name="zipcode"
             placeholder="zipcode"
           />
-          <button>Register</button>
+          <button type="submit">Register</button>
           <button onClick={() => props.setViewSignUp(false)}>Cancel</button>
         </form>
       </div>

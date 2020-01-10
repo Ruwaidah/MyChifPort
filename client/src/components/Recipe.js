@@ -15,15 +15,23 @@ function Recipe(props) {
   if (props.isloading || !props.data) return <h3>Loading</h3>;
 
   return (
-    <div>
-      <h1>Welcome</h1>
-      <img src={props.data.image} width="200px" />
+    <div className="recipePage">
+      <img src={props.data.image} width="300px" />
       <h2>{props.data.recipe_name}</h2>
-      <h6>{props.data.ingredients}</h6>
-      <h6>{props.data.instructions}</h6>
-
-      <Link to="/edite">edite</Link>
-      <button>delete</button>
+      <div className="recipecotent">
+        <span> Ingredients:</span> <p>{props.data.ingredients}</p>
+      </div>
+      <div className="recipecotent">
+        {" "}
+        <span>Instructions:</span> <p>{props.data.instructions}</p>
+      </div>
+      {sessionStorage.getItem("token") ? (
+        <div>
+          {" "}
+          <Link to="/edite">edite</Link>
+          <button>delete</button>
+        </div>
+      ) : null}
     </div>
   );
 }

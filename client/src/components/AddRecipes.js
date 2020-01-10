@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addRecipe, uploadImage } from "../actions/index.js";
+import { addRecipe } from "../actions/index.js";
 import MealType from "./MealType.js";
 import { axiosWithAuth } from "./axiosWithuth.js";
 
@@ -29,7 +29,7 @@ function AddRecipes(props) {
     const formdata = new FormData();
     if (img) formdata.append("image", img, img.name);
     values.mealtype = 1;
-    props.uploadImage(formdata, values);
+    props.addRecipe(formdata, values);
 
     // values.formdata = formdata;
   };
@@ -81,4 +81,4 @@ const mapStatetoProps = state => {
   };
 };
 
-export default connect(mapStatetoProps, { addRecipe, uploadImage })(AddRecipes);
+export default connect(mapStatetoProps, { addRecipe })(AddRecipes);

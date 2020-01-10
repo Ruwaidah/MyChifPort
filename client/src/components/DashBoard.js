@@ -12,27 +12,20 @@ function DashBoard(props) {
 
   return (
     <div>
-      <h1>Welcome {props.user.username}</h1>
-      <button
-        onClick={() => {
-          sessionStorage.clear();
-          props.history.push("/");
-          props.setViewLogin(false);
-        }}
-      >
-        logout
-      </button>
       <Link to={`/user/${props.user.id}/create-recipe`}> Create Recipe</Link>
-      {props.alluserRecipes.map(recipe => (
-        <div key={recipe.id}>
-          <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
-            <img src={recipe.image} width="200px" />
-            <h2>{recipe.recipe_name}</h2>
-            <h5>{recipe.mealtype}</h5>
-            <p>By: {recipe.username}</p>
-          </Link>
-        </div>
-      ))}
+      {props.alluserRecipes.length == 0 ? <p>No recipes</p> : null}
+      <div className="recipes-container">
+        {props.alluserRecipes.map(recipe => (
+          <div key={recipe.id} className="recipeCard">
+            <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
+              <img src={recipe.image} width="200px" />
+              <h2>{recipe.recipe_name}</h2>
+              <h5>{recipe.mealtype}</h5>
+              <p>By: {recipe.username}</p>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

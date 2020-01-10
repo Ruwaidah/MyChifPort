@@ -92,24 +92,24 @@ export const signUp = values => dispatch => {
     .catch(error => console.log(error));
 };
 
-// Add recipe
-export const addRecipe = (values, image, id) => dispatch => {
-  values.image = image;
-  const authAxios = axiosWithAuth();
-  console.log(values, image, id);
-  authAxios
-    .post(
-      `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
-        "userid"
-      )}`,
-      values
-    )
-    .then(respo => console.log(respo))
-    .catch(error => console.log(error));
-};
+// // Add recipe
+// export const addRecipe = (values, image, id) => dispatch => {
+//   values.image = image;
+//   const authAxios = axiosWithAuth();
+//   console.log(values, image, id);
+//   authAxios
+//     .post(
+//       `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
+//         "userid"
+//       )}`,
+//       values
+//     )
+//     .then(respo => console.log(respo))
+//     .catch(error => console.log(error));
+// };
 
-// Upload Image
-export const uploadImage = (image, values, id) => dispatch => {
+// Add Recipe
+export const addRecipe = (image, values, id) => dispatch => {
   console.log(id);
   const authAxios = axiosWithAuth();
   authAxios
@@ -119,7 +119,12 @@ export const uploadImage = (image, values, id) => dispatch => {
       values.image = imageId.data;
 
       authAxios
-        .post(`https://chefportfolio11.herokuapp.com/api/auth/user/3`, values)
+        .post(
+          `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
+            "userid"
+          )}`,
+          values
+        )
         .then(respo => console.log(respo));
       // addRecipe(values, imageId, id);
     })
