@@ -6,7 +6,7 @@ import { axiosWithAuth } from "./axiosWithuth.js";
 
 function AddRecipes(props) {
   console.log("useris", props.match.params.id);
-  const [mealType, setmealType] = useState();
+  const [mealType, setmealType] = useState(1);
   const [img, setImage] = useState();
 
   const [values, setValues] = useState({
