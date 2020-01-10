@@ -12,7 +12,8 @@ function AddRecipes(props) {
   const [values, setValues] = useState({
     recipe_name: "",
     ingredients: "",
-    instructions: ""
+    instructions: "",
+    mealtype: mealType
   });
   const onChange = event => {
     setValues({
@@ -28,7 +29,7 @@ function AddRecipes(props) {
     event.preventDefault();
     const formdata = new FormData();
     if (img) formdata.append("image", img, img.name);
-    values.mealtype = 1;
+    values.mealtype = mealType;
     props.addRecipe(formdata, values, props.history);
   };
   return (

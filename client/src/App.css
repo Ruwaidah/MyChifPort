@@ -103,7 +103,7 @@
   left: 30%;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1400px) {
   .loginform .field {
     display: flex;
     justify-content: center;
@@ -119,8 +119,8 @@
   #signupform {
     width: 90%;
     top: 20%;
-    left: 35%;
-    height: 450px;
+    left: 25%;
+    height: 500px;
   }
   #signup label {
     font-size: 20px;
