@@ -139,7 +139,7 @@ export const recipeById = id => dispatch => {
 };
 
 // Update Recipe
-export const updateRecipe = (values, id) => dispatch => {
+export const updateRecipe = (values, id, history) => dispatch => {
   const authAxios = axiosWithAuth();
 
   authAxios
@@ -148,17 +148,22 @@ export const updateRecipe = (values, id) => dispatch => {
       values
     )
     .then(respo => {
-      console.log(respo);
+      dispatch({ type: ADDING_RECIPE, payload: respo });
+      history.push(`/recipes/${id}`);
     })
     .catch(error => console.log(error));
 };
 
 // Delete Recipe
-export const deleteRecipe = id => dispatch => {
+export const deleteRecipe = (id, history) => dispatch => {
   const authAxios = axiosWithAuth();
 
   authAxios
     .delete(`https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${id}`)
-    .then(respo => console.log(respo))
+    .then(respo => {
+      dispatch({ type: ADDING_RECIPE, payload: respo });
+      console.log(id);
+      history.push("/user");
+    })
     .catch(error => console.log(error));
 };

@@ -39,8 +39,7 @@ function Recipe(props) {
           </Link>
           <button
             onClick={() => {
-              props.deleteRecipe(props.match.params.id);
-              props.history.goBack();
+              props.deleteRecipe(props.match.params.id, props.history);
             }}
           >
             delete

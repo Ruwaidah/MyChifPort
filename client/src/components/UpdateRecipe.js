@@ -21,7 +21,7 @@ function UpdateRecipe(props) {
   console.log(values);
   const onSubmit = event => {
     event.preventDefault();
-    props.updateRecipe(values, props.data.id);
+    props.updateRecipe(values, props.data.id, props.history);
   };
 
   return (
@@ -75,7 +75,11 @@ function UpdateRecipe(props) {
         </div>
         <div className="field create-btns">
           <button type="submit">Edite</button>
-          <button onClick={() => props.history.goBack()}>Cancel</button>
+          <button
+            onClick={() => props.history.push(`/recipes/${props.data.id}`)}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
