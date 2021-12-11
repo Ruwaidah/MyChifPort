@@ -1,5 +1,6 @@
 import axios from "axios";
-import { axiosWithAuth } from "../components/axiosWithuth.js";
+// import { axiosWithAuth } from "../components/axiosWithuth.js";
+import axiosWithAuth from "../utils/axiosWithAuth";
 export const LOADING = "LOADING";
 export const LOGIN_FETCH = "LOGIN_FETCH";
 export const FAILED = "FAILED";
@@ -14,8 +15,8 @@ export const globalRecipes = () => dispatch => {
   dispatch({
     type: LOADING
   });
-  axios
-    .get("https://chefportfolio11.herokuapp.com/api/recipes")
+  axiosWithAuth()
+    .get("api/recipes")
     .then(respo => {
       console.log(respo);
       dispatch({
@@ -33,14 +34,14 @@ export const globalRecipes = () => dispatch => {
 
 // Get User Recipes
 export const userRecipes = id => dispatch => {
-  const authAxios = axiosWithAuth();
+  // const authAxios = axiosWithAuth();
   console.log(sessionStorage.getItem("userid"));
   dispatch({
     type: LOADING
   });
-  authAxios
+  axiosWithAuth()
     .get(
-      `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
+      `api/auth/user/${sessionStorage.getItem(
         "userid"
       )}`
     )
@@ -64,8 +65,8 @@ export const loginUser = (user, history) => dispatch => {
   dispatch({
     type: LOADING
   });
-  axios
-    .post("https://chefportfolio11.herokuapp.com/api/auth/login", user)
+  axiosWithAuth()
+    .post("api/auth/login", user)
     .then(respo => {
       console.log(respo);
       sessionStorage.setItem("token", respo.data.token);
@@ -87,8 +88,8 @@ export const loginUser = (user, history) => dispatch => {
 // Post Signup
 export const signUp = values => dispatch => {
   console.log(values);
-  axios
-    .post("https://chefportfolio11.herokuapp.com/api/auth/register", values)
+  axiosWithAuth()
+    .post("api/auth/register", values)
     .then(respo => console.log(respo))
     .catch(error => console.log(error));
 };
@@ -98,15 +99,15 @@ export const addRecipe = (image, values, history) => dispatch => {
   dispatch({
     type: LOADING
   });
-  const authAxios = axiosWithAuth();
-  authAxios
-    .post(`https://chefportfolio11.herokuapp.com/api/auth/user/image`, image)
+  // const authAxios = axiosWithAuth();
+  axiosWithAuth()
+    .post(`api/auth/user/image`, image)
     .then(imageId => {
       values.image = imageId.data;
 
-      authAxios
+      axiosWithAuth()
         .post(
-          `https://chefportfolio11.herokuapp.com/api/auth/user/${sessionStorage.getItem(
+          `api/auth/user/${sessionStorage.getItem(
             "userid"
           )}`,
           values
@@ -126,8 +127,8 @@ export const recipeById = id => dispatch => {
   dispatch({
     type: LOADING
   });
-  axios
-    .get(`https://chefportfolio11.herokuapp.com/api/recipes/${id}`)
+  axiosWithAuth()
+    .get(`api/recipes/${id}`)
     .then(respo => {
       console.log(respo);
       dispatch({
@@ -140,11 +141,11 @@ export const recipeById = id => dispatch => {
 
 // Update Recipe
 export const updateRecipe = (values, id, history) => dispatch => {
-  const authAxios = axiosWithAuth();
+  // const authAxios = axiosWithAuth();
 
-  authAxios
+  axiosWithAuth()
     .put(
-      `https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${id}`,
+      `api/auth/user/recipes/${id}`,
       values
     )
     .then(respo => {
@@ -156,10 +157,10 @@ export const updateRecipe = (values, id, history) => dispatch => {
 
 // Delete Recipe
 export const deleteRecipe = (id, history) => dispatch => {
-  const authAxios = axiosWithAuth();
+  // const authAxios = axiosWithAuth();
 
-  authAxios
-    .delete(`https://chefportfolio11.herokuapp.com/api/auth/user/recipes/${id}`)
+  axiosWithAuth()
+    .delete(`api/auth/user/recipes/${id}`)
     .then(respo => {
       dispatch({ type: ADDING_RECIPE, payload: respo });
       console.log(id);

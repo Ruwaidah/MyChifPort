@@ -2,23 +2,18 @@
 
 module.exports = {
   development: {
-    client: "sqlite3",
+    client: "postgresql",
     useNullAsDefault: true,
-    connection: {
-      filename: "./database/chefportfolio.db3"
+    connection: { database: "chiefs", user: "postgres", password: "dgre" },
+    pool: {
+      min: 1,
+      max: 20,
     },
     migrations: {
+      tablename: "knex_migrations",
       directory: "./database/migrations"
     },
-    seeds: {
-      directory: "./database/seeds"
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      }
-    }
+    seeds: { directory: "./database/seeds" }
   },
   production: {
     client: "pg",
