@@ -1,10 +1,12 @@
 // Update with your config settings.
 
+require("dotenv").config()
+
 module.exports = {
   development: {
     client: "postgresql",
     useNullAsDefault: true,
-    connection: { database: "chiefs", user: "postgres", password: "dgre" },
+    connection: { database: "chiefs", user: "postgres", password: process.env.PASSWORD},
     pool: {
       min: 1,
       max: 20,

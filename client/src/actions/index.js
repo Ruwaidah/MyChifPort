@@ -100,6 +100,7 @@ export const addRecipe = (image, values, history) => dispatch => {
     type: LOADING
   });
   // const authAxios = axiosWithAuth();
+  console.log("image", sessionStorage.getItem("token"))
   axiosWithAuth()
     .post(`api/auth/user/image`, image)
     .then(imageId => {

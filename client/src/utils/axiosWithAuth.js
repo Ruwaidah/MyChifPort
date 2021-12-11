@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const axiosWithAuth = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   return Axios.create({
     baseURL: "http://localhost:5000/",
