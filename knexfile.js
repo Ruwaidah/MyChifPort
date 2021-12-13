@@ -6,7 +6,7 @@ module.exports = {
   development: {
     client: "postgresql",
     useNullAsDefault: true,
-    connection: { database: "chiefs", user: "postgres", password: process.env.PASSWORD},
+    connection: { database: "chiefs", user: "postgres", password: process.env.PASS},
     pool: {
       min: 1,
       max: 20,
