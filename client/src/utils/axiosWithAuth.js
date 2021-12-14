@@ -4,7 +4,7 @@ const axiosWithAuth = () => {
   const token = sessionStorage.getItem("token");
 
   return Axios.create({
-    baseURL: "https://chefportfolio11.herokuapp.com/",
+    baseURL: "https://chiefs0.herokuapp.com/",
     headers: {
       authorization: token,
     },
