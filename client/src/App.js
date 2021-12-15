@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./app.scss";
 import HomePage from "./components/HomePage.js";
 import { Route, Switch } from "react-router-dom";
 import Login from "./components/Login.js";

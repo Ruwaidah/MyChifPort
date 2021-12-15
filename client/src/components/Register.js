@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { signUp } from "../actions/index.js";
+import "./register.scss"
 
 function Register(props) {
   const [values, setValues] = useState({

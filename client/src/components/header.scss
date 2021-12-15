@@ -1,0 +1,54 @@
+/*  Header */
+.header {
+  // position: relative;
+  font-family: "Bad Script", sans-serif;
+  margin: 0;
+  border-bottom: rgb(179, 179, 179) 1px solid;
+  box-shadow: whitesmoke 5px 1px 10px;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.header .headerbtns {
+  margin: 0;
+  width: 40%;
+  // width: 300px;
+  // position: absolute;
+  // right: 40px;
+  // top: 80px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.header .headerbtns button,
+.logout {
+  // margin-right: 50px;
+  color: black;
+  background: none;
+  border: none;
+  font-size: 30px;
+  text-shadow: whitesmoke 1px 2px 14px;
+  // font-family: "Aladin", "Bad Script", sans-serif;
+  font-family: "Source Sans 3", sans-serif;
+  outline: none;
+}
+
+.logout {
+  margin-right: 50px;
+align-items: center;
+  
+}
+
+.headerbtns .loginhover:hover {
+  color: rgb(224, 194, 18);
+}
+
+.header .logout:hover {
+  color: rgb(224, 194, 18);
+}
+
+.header img {
+  width: 350px;
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import Image from "../FoodLogo.png";
+// import Image from "../FoodLogo.png";
+import Image from "../Food.png"
+import "./header.scss"
 
 function Header(props) {
   console.log(Image);

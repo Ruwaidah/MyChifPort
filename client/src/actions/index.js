@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { axiosWithAuth } from "../components/axiosWithuth.js";
 import axiosWithAuth from "../utils/axiosWithAuth";
 export const LOADING = "LOADING";
 export const LOGIN_FETCH = "LOGIN_FETCH";

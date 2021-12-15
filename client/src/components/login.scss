@@ -1,0 +1,90 @@
+.loginform {
+    // font-family: "Aladin", "Bad Script", sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
+    display: flex;
+    flex-direction: column;
+    color: rgb(238, 236, 236);
+    background: rgb(5, 5, 5);
+    border-radius: 4px;
+    position: fixed;
+    width: 900px;
+    min-height: 300px;
+    top: 40%;
+    left: 40%;
+    margin-top: -100px;
+    margin-left: -250px;
+    animation: fadeIn 0.6s;
+  }
+  
+  .loginform h4 {
+    font-size: 30px;
+  }
+  
+  .loginform .field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 80%;
+  }
+  
+  .loginform .field label {
+    width: 190px;
+    font-size: 36px;
+  }
+  
+  .loginform .field input {
+    font-family: "Average Sans", sans-serif;
+    font-size: 30px;
+    border: none;
+    background: lightgray;
+    height: 50px;
+    width: 400px;
+  }
+  
+  .loginform .loginbtn {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .loginform .loginbtn button {
+    margin-left: 50px;
+    font-family: "Average Sans", sans-serif;
+    background: none;
+    color: rgb(241, 241, 241);
+    font-size: 30px;
+    border: none;
+  }
+
+
+  @media (max-width: 1400px) {
+    .loginform .field {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 5px;
+      width: 80%;
+    }
+    #signup {
+      width: 50%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #signupform {
+      width: 90%;
+      top: 20%;
+      left: 25%;
+      height: 500px;
+    }
+    #signup label {
+      font-size: 20px;
+      width: 10%;
+    }
+    #signup input {
+      font-size: 20px;
+      height: 30px;
+      width: 30%;
+      font-family: "Average Sans", sans-serif;
+    }
+  }

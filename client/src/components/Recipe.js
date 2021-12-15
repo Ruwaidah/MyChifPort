@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { globalRecipes } from "../actions/index.js";
 import { recipeById, deleteRecipe } from "../actions/index.js";
+import "./recipe.scss"
 
 function Recipe(props) {
   useEffect(() => {

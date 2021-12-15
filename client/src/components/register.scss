@@ -1,0 +1,41 @@
+#signupform {
+    width: 70%;
+    top: 15%;
+    left: 30%;
+  }
+  
+  
+  #signup label {
+    width: 30%;
+  }
+  
+  #signup input {
+    width: 65%;
+    font-family: "Average Sans", sans-serif;
+  }
+  
+  #signup,
+  .create-form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #signup .field {
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  #signup .loginbtn {
+    width: 100%;
+  }
+  #signup .loginbtn button {
+    font-family: "Average Sans", sans-serif;
+  
+    margin-left: 50px;
+    background: none;
+    color: rgb(241, 241, 241);
+    font-size: 30px;
+    border: none;
+    outline: none;
+  }

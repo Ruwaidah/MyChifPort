@@ -1,0 +1,57 @@
+/* recipe Page */
+.recipePage {
+    margin: 50px auto;
+    width: 900px;
+    min-height: 80vh;
+  }
+  
+  .recipePage h2 {
+    font-family: "Alegreya SC", serif;
+    font-size: 30px;
+    margin-bottom: 70px;
+  }
+  
+
+  .recipecotent {
+    /* margin-top: 30px;
+    margin-bottom: 50px; */
+    font-family: "Alegreya SC", serif;
+  
+    padding-bottom: 50px;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .recipecotent span {
+    font-weight: 500;
+    font-size: 30px;
+  }
+  .recipecotent p {
+    font-size: 25px;
+    margin: 0;
+  
+    margin-left: 50px;
+    text-align: start;
+  }
+
+  /* create recipe */
+.editedelete button,
+.recipePage .editedelete a {
+  width: 200px;
+  font-family: "Average Sans", sans-serif;
+  height: 40px;
+  font-size: 17px;
+  margin-left: 50px;
+  background: none;
+  border: whitesmoke 1px solid;
+  color: rgb(15, 15, 15);
+  box-shadow: lightgray 1px 1px 10px;
+}
+
+
+#edite {
+    width: 30%;
+    padding: 2px 70px;
+    font-size: 25px;
+    text-decoration: none;
+  }

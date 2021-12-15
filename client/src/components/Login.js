@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/index.js";
+import "./login.scss"
 
 function Login(props) {
   console.log(props);
@@ -23,7 +24,7 @@ function Login(props) {
   if (props.viewLogin)
     return (
       <div className="loginform">
-        <h4>LogIn</h4>
+        <h4>Login</h4>
         <form onSubmit={onSubmit}>
           <div className="field">
             <label htmlFor="username">Username: </label>

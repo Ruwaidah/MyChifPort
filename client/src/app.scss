@@ -1,0 +1,110 @@
+@import "variables.scss";
+
+.App {
+  text-align: center;
+  background: rgb(252, 251, 246);
+  // max-width: 1500px;
+  max-width:98%;
+  margin: 0 auto;
+  min-height: 100vh;
+  color: rgb(22, 22, 22);
+}
+
+.foggy {
+  filter: blur(15px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Recipe Card */
+.recipeCard {
+  border-radius: 3px;
+  margin: 20px;
+  height: 400px;
+  width: 28%;
+  border: rgb(235, 231, 231) 1px solid;
+  // box-shadow: grey 5px 0.5px 25px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipeCard h3,
+.recipeCard img {
+  margin: 10px;
+}
+
+.recipeCard img {
+  margin: 0;
+  width:300px;
+  height: 300px;
+}
+
+.recipeCard h5 {
+  margin: 5px;
+  font-size: 18px;
+  color: rgb(78, 78, 78);
+}
+
+.recipeCard h3 {
+  color: black;
+}
+.recipeCard a {
+  text-decoration: none;
+  color: black;
+}
+
+/* recipes-container */
+.recipes-container {
+  // margin-top: 80px;
+  margin: 0 ;
+  min-height: 80vh;
+  display: flex;
+  max-width:96%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer */
+
+.footer {
+  border-top: whitesmoke 1px solid;
+  box-shadow: whitesmoke 5px 1px 10px;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+#loading,
+#loading1 {
+  height: 100vh;
+}

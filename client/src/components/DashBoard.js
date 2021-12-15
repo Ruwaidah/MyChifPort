@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { userRecipes } from "../actions/index.js";
+import "./dashboard.scss"
 
 function DashBoard(props) {
   useEffect(() => {
@@ -20,7 +21,7 @@ function DashBoard(props) {
           <div key={recipe.id} className="recipeCard">
             <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
               <img src={recipe.image} width="350px" height="290px" />
-              <h2>{recipe.recipe_name}</h2>
+              <h3>{recipe.recipe_name}</h3>
               <h5>{recipe.mealtype}</h5>
             </Link>
           </div>

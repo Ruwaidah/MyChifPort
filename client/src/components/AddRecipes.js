@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addRecipe } from "../actions/index.js";
 import MealType from "./MealType.js";
-import { axiosWithAuth } from "./axiosWithuth.js";
+import "./addrecipes.scss";
 
 function AddRecipes(props) {
   console.log("useris", props.match.params.id);
@@ -13,19 +13,19 @@ function AddRecipes(props) {
     recipe_name: "",
     ingredients: "",
     instructions: "",
-    mealtype: mealType
+    mealtype: mealType,
   });
-  const onChange = event => {
+  const onChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
-  const onImageChange = event => {
+  const onImageChange = (event) => {
     setImage(event.target.files[0]);
   };
 
-  const onSubmit = async event => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     const formdata = new FormData();
     if (img) formdata.append("image", img, img.name);
@@ -81,10 +81,10 @@ function AddRecipes(props) {
   );
 }
 
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
   return {
     isloading: state.isloading,
-    user: state.user
+    user: state.user,
   };
 };
 
