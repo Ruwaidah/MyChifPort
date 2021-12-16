@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../actions/index.js";
-import "./login.scss"
+import "./login.scss";
 
 function Login(props) {
-  console.log(props);
   const [values, setValues] = useState({
     username: "",
-    password: ""
+    password: "",
   });
-  const handleChange = event => {
+
+  const handleChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
-  const onSubmit = event => {
-    props.setViewLogin(false);
+  const onSubmit = (event) => {
+    // props.setViewLogin(false);
     event.preventDefault();
     props.loginUser(values, props.history);
   };
@@ -25,6 +25,7 @@ function Login(props) {
     return (
       <div className="loginform">
         <h4>Login</h4>
+        {props.error && <p className="errorMsg">{props.error}</p>}
         <form onSubmit={onSubmit}>
           <div className="field">
             <label htmlFor="username">Username: </label>
@@ -53,10 +54,11 @@ function Login(props) {
     );
 }
 
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
   return {
     isloading: state.isloading,
-    user: state.user
+    user: state.user,
+    error: state.error,
   };
 };
 

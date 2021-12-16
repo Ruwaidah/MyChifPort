@@ -37,7 +37,7 @@ export const rootReducer = (state = initiallstate, actions) => {
       return {
         ...state,
         isloading: false,
-        error: actions.payload
+        error: actions.payload.response.data.message
       };
     case LOGIN_FETCH:
       console.log(actions.payload);
