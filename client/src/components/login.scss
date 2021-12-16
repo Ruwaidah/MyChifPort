@@ -34,12 +34,14 @@
   }
   
   .loginform .field input {
+    border-radius: 6px;
     font-family: "Average Sans", sans-serif;
     font-size: 30px;
     border: none;
     background: lightgray;
-    height: 50px;
+    height: 60px;
     width: 400px;
+    padding-left: 10px ;
   }
   
   .loginform .loginbtn {

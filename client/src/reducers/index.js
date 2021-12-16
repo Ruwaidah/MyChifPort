@@ -5,7 +5,8 @@ import {
   LOGIN_FETCH,
   RECIPE_FETCH,
   USER_RECIPES,
-  ADDING_RECIPE
+  ADDING_RECIPE,
+  CLEANNING
 } from "../actions/index.js";
 
 const initiallstate = {
@@ -14,7 +15,7 @@ const initiallstate = {
   isloading: false,
   error: null,
   data: null,
-  userRecipes: []
+  userRecipes: [],
 };
 
 export const rootReducer = (state = initiallstate, actions) => {
@@ -23,7 +24,7 @@ export const rootReducer = (state = initiallstate, actions) => {
       return {
         ...state,
         isloading: true,
-        error: null
+        error: null,
       };
     case GLOBAL_RECIPES_FETCH:
       console.log(actions.payload);
@@ -31,13 +32,13 @@ export const rootReducer = (state = initiallstate, actions) => {
         ...state,
         recipes: actions.payload,
         isloading: false,
-        error: null
+        error: null,
       };
     case FAILED:
       return {
         ...state,
         isloading: false,
-        error: actions.payload.response.data.message
+        error: actions.payload.response.data.message,
       };
     case LOGIN_FETCH:
       console.log(actions.payload);
@@ -45,7 +46,7 @@ export const rootReducer = (state = initiallstate, actions) => {
         ...state,
         user: actions.payload,
         isloading: false,
-        error: null
+        error: null,
       };
     case RECIPE_FETCH:
       console.log(actions.payload);
@@ -53,7 +54,7 @@ export const rootReducer = (state = initiallstate, actions) => {
         ...state,
         data: actions.payload,
         isloading: false,
-        error: null
+        error: null,
       };
     case USER_RECIPES:
       console.log(actions.payload);
@@ -61,11 +62,18 @@ export const rootReducer = (state = initiallstate, actions) => {
         ...state,
         userRecipes: actions.payload,
         isloading: false,
-        error: null
+        error: null,
+      };
+
+    case CLEANNING:
+      return {
+        ...state,
+        isloading: false,
+        error: null,
       };
     case ADDING_RECIPE:
       return {
-        ...state
+        ...state,
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { loginUser } from "../actions/index.js";
+import { loginUser,cleanState } from "../actions/index.js";
 import "./login.scss";
 
 function Login(props) {
@@ -47,7 +47,7 @@ function Login(props) {
           </div>
           <div className="loginbtn">
             <button type="submit">Login</button>
-            <button onClick={() => props.setViewLogin(false)}>Cancel</button>
+            <button onClick={() =>{props.cleanState(); props.setViewLogin(false)}}>Cancel</button>
           </div>
         </form>
       </div>
@@ -62,4 +62,4 @@ const mapStatetoProps = (state) => {
   };
 };
 
-export default connect(mapStatetoProps, { loginUser })(Login);
+export default connect(mapStatetoProps, { loginUser, cleanState })(Login);

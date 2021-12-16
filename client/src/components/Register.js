@@ -33,7 +33,8 @@ function Register(props) {
         <h4>Register</h4>
         <form onSubmit={onSubmit} id="signup">
           <div className="field">
-            <label htmlFor="firstname">firstname: </label>
+            {/* <label htmlFor="firstname">firstname: </label> */}
+            <span>*</span>
             <input
               onChange={onChange}
               type="text"
@@ -42,7 +43,8 @@ function Register(props) {
             />
           </div>
           <div className="field">
-            <label htmlFor="lastname">lastname: </label>
+            {/* <label htmlFor="lastname">lastname: </label> */}
+            <span>*</span>
             <input
               onChange={onChange}
               type="text"
@@ -51,7 +53,8 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="username">Username: </label>
+            {/* <label htmlFor="username">Username: </label> */}
+            <span>*</span>
             <input
               onChange={onChange}
               type="text"
@@ -60,7 +63,8 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="password">Password: </label>
+            {/* <label htmlFor="password">Password: </label> */}
+            <span>*</span>
             <input
               onChange={onChange}
               type="password"
@@ -69,7 +73,8 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="email">Email: </label>
+            {/* <label htmlFor="email">Email: </label> */}
+            <span>*</span>
             <input
               onChange={onChange}
               type="email"
@@ -78,8 +83,9 @@ function Register(props) {
             />
           </div>
           <div className="field">
-            <label htmlFor="state">State: </label>
+            {/* <label htmlFor="state">State: </label> */}
             <input
+            className="notreq"
               onChange={onChange}
               type="text"
               name="state"
@@ -87,8 +93,9 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="city">City: </label>
+            {/* <label htmlFor="city">City: </label> */}
             <input
+            className="notreq"
               onChange={onChange}
               type="text"
               name="city"
@@ -96,8 +103,9 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="address">Address: </label>
+            {/* <label htmlFor="address">Address: </label> */}
             <input
+            className="notreq"
               onChange={onChange}
               type="text"
               name="address"
@@ -105,8 +113,9 @@ function Register(props) {
             />
           </div>{" "}
           <div className="field">
-            <label htmlFor="phone">Phone: </label>
+            {/* <label htmlFor="phone">Phone: </label> */}
             <input
+            className="notreq"
               onChange={onChange}
               type="number"
               name="phone"
@@ -114,8 +123,9 @@ function Register(props) {
             />
           </div>
           <div className="field">
-            <label htmlFor="zipcode">zipcode: </label>
+            {/* <label htmlFor="zipcode">zipcode: </label> */}
             <input
+            className="notreq"
               onChange={onChange}
               type="number"
               name="zipcode"

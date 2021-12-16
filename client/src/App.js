@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Route
         path="/"
-        render={props => (
+        render={(props) => (
           <Header
             setViewLogin={setViewLogin}
             setViewSignUp={setViewSignUp}
@@ -34,18 +34,20 @@ function App() {
         <Route
           exact
           path="/user"
-          render={props => <DashBoard {...props} setViewLogin={setViewLogin} />}
+          render={(props) => (
+            <DashBoard {...props} setViewLogin={setViewLogin} />
+          )}
         />
         <Route
           path="/user/:id/create-recipe"
-          render={props => <AddRecipes {...props} />}
+          render={(props) => <AddRecipes {...props} />}
         />
       </PrivateRoute>
 
       <Route
         exact
         path="/"
-        render={props => (
+        render={(props) => (
           <HomePage
             setViewLogin={setViewLogin}
             setViewSignUp={setViewSignUp}
@@ -56,16 +58,14 @@ function App() {
         )}
       />
       <Route
-        exact
         path="/"
-        render={props => (
+        render={(props) => (
           <Login {...props} setViewLogin={setViewLogin} viewLogin={viewLogin} />
         )}
       />
       <Route
-        exact
         path="/"
-        render={props => (
+        render={(props) => (
           <Register
             {...props}
             viewSignUp={viewSignUp}
@@ -77,15 +77,15 @@ function App() {
       <Route
         exact
         path="/edite"
-        render={props => <UpdateRecipe {...props} />}
+        render={(props) => <UpdateRecipe {...props} />}
       />
 
       <Route
         exact
         path="/recipes/:id"
-        render={props => <Recipe {...props} setViewLogin={setViewLogin} />}
+        render={(props) => <Recipe {...props} setViewLogin={setViewLogin} />}
       />
-      <Route path="/" render={props => <Footer {...props} />} />
+      <Route path="/" render={(props) => <Footer {...props} />} />
     </div>
   );
 }
