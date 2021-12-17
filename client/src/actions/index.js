@@ -57,7 +57,7 @@ export const userRecipes = (id) => (dispatch) => {
 };
 
 // Post Login
-export const loginUser = (user, history) => (dispatch) => {
+export const loginUser = (user, history, showlogin) => (dispatch) => {
   dispatch({
     type: LOADING,
   });
@@ -65,6 +65,7 @@ export const loginUser = (user, history) => (dispatch) => {
     .post("api/auth/login", user)
     .then((respo) => {
       console.log(respo);
+      showlogin(false);
       sessionStorage.setItem("token", respo.data.token);
       sessionStorage.setItem("userid", respo.data.user.id);
       dispatch({
@@ -82,12 +83,20 @@ export const loginUser = (user, history) => (dispatch) => {
 };
 
 // Post Signup
-export const signUp = (values) => (dispatch) => {
+export const signUp = (values, showsignup) => (dispatch) => {
   console.log(values);
   axiosWithAuth()
     .post("api/auth/register", values)
-    .then((respo) => console.log(respo))
-    .catch((error) => console.log(error));
+    .then((respo) => {
+      console.log(respo);
+      showsignup(false);
+    })
+    .catch((error) =>
+      dispatch({
+        type: FAILED,
+        payload: error,
+      })
+    );
 };
 
 // Add Recipe

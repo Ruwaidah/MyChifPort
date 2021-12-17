@@ -60,7 +60,7 @@ function AddRecipes(props) {
             onChange={onChange}
             type="ingredients"
             name="ingredients"
-            placeholder="ingredients"
+            // placeholder="ingredients"
           />
         </div>
         <div className="field">
@@ -69,7 +69,7 @@ function AddRecipes(props) {
             onChange={onChange}
             type="instructions"
             name="instructions"
-            placeholder="instructions"
+            // placeholder="instructions"
           />
         </div>
         <div className="field create-btns">

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { signUp } from "../actions/index.js";
-import "./register.scss"
+import { signUp, cleanState } from "../actions/index.js";
+import "./register.scss";
 
 function Register(props) {
+  console.log(props.error);
   const [values, setValues] = useState({
     username: null,
     firstname: null,
@@ -13,24 +14,25 @@ function Register(props) {
     phone: null,
     address: null,
     city: null,
-    state: null
+    state: null,
   });
-  const onChange = event => {
+  const onChange = (event) => {
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    props.setViewSignUp(false);
-    props.signUp(values);
+    // props.setViewSignUp(false);
+    props.signUp(values, props.setViewSignUp);
   };
   if (props.viewSignUp)
     return (
       <div className="loginform" id="signupform">
         <h4>Register</h4>
+        {props.error && <p className="errorMsg">{props.error}</p>}
         <form onSubmit={onSubmit} id="signup">
           <div className="field">
             {/* <label htmlFor="firstname">firstname: </label> */}
@@ -85,7 +87,7 @@ function Register(props) {
           <div className="field">
             {/* <label htmlFor="state">State: </label> */}
             <input
-            className="notreq"
+              className="notreq"
               onChange={onChange}
               type="text"
               name="state"
@@ -95,7 +97,7 @@ function Register(props) {
           <div className="field">
             {/* <label htmlFor="city">City: </label> */}
             <input
-            className="notreq"
+              className="notreq"
               onChange={onChange}
               type="text"
               name="city"
@@ -105,7 +107,7 @@ function Register(props) {
           <div className="field">
             {/* <label htmlFor="address">Address: </label> */}
             <input
-            className="notreq"
+              className="notreq"
               onChange={onChange}
               type="text"
               name="address"
@@ -115,7 +117,7 @@ function Register(props) {
           <div className="field">
             {/* <label htmlFor="phone">Phone: </label> */}
             <input
-            className="notreq"
+              className="notreq"
               onChange={onChange}
               type="number"
               name="phone"
@@ -125,7 +127,7 @@ function Register(props) {
           <div className="field">
             {/* <label htmlFor="zipcode">zipcode: </label> */}
             <input
-            className="notreq"
+              className="notreq"
               onChange={onChange}
               type="number"
               name="zipcode"
@@ -135,7 +137,14 @@ function Register(props) {
           <br />
           <div className="loginbtn">
             <button type="submit">Register</button>
-            <button onClick={() => props.setViewSignUp(false)}>Cancel</button>
+            <button
+              onClick={() => {
+                props.cleanState();
+                props.setViewSignUp(false);
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>
@@ -145,10 +154,11 @@ function Register(props) {
   }
 }
 
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
   return {
-    isloading: state.isloading
+    isloading: state.isloading,
+    error: state.error,
   };
 };
 
-export default connect(mapStatetoProps, { signUp })(Register);
+export default connect(mapStatetoProps, { signUp, cleanState })(Register);

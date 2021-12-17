@@ -24,9 +24,9 @@
   
   .create-form .field textarea {
     font-family: "Average Sans", sans-serif;
-  
     padding-left: 10px;
     height: 100px;
+    border: black 1px solid;
     font-size: 25px;
   }
   .create-form .field label {
@@ -41,9 +41,10 @@
   
   .create-form .field select {
     font-family: "Average Sans", sans-serif;
-    width: 20%;
-    font-size: 25px;
-    border: none;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    border: black 1px solid;
   }
   
   .create-form .create-btns {
@@ -56,12 +57,11 @@
     width: 200px;
     font-family: "Average Sans", sans-serif;
     height: 40px;
-    font-size: 17px;
+    font-size: 20px;
     margin-left: 50px;
     background: none;
-    border: whitesmoke 1px solid;
-    color: whitesmoke;
-    box-shadow: lightgray 1px 1px 10px;
+    border: rgb(0, 0, 0) 1px solid;
+    color: rgb(19, 12, 12);
   }
   
   .create-form .create-btns button:hover {

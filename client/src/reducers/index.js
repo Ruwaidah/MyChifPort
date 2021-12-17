@@ -15,7 +15,7 @@ const initiallstate = {
   isloading: false,
   error: null,
   data: null,
-  userRecipes: [],
+  userRecipes: []
 };
 
 export const rootReducer = (state = initiallstate, actions) => {

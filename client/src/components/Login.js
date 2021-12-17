@@ -18,7 +18,7 @@ function Login(props) {
   const onSubmit = (event) => {
     // props.setViewLogin(false);
     event.preventDefault();
-    props.loginUser(values, props.history);
+    props.loginUser(values, props.history, props.setViewLogin);
   };
   if (!props.viewLogin) return null;
   if (props.viewLogin)
