@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { updateRecipe } from "../actions/index.js";
+import MealType from "./MealType.js";
 
 function UpdateRecipe(props) {
-  console.log(props.data);
-  const mealType = ["Breakfast", "Lunch", "Dinner", "snack", "Dessert"];
+  const [mealType, setmealType] = useState(props.data.meal_type_id);
+  const type = ["Breakfast", "Lunch", "Dinner", "snack", "Dessert"];
+  console.log(props.mealtype, mealType);
   const [values, setValues] = useState({
     recipe_name: props.data.recipe_name,
     mealtype: props.data.meal_type_id,
     ingredients: props.data.ingredients,
-    instructions: props.data.instructions
+    instructions: props.data.instructions,
   });
-  const handleChange = event => {
+  const handleChange = (event) => {
+    console.log(event.target.value, mealType);
     setValues({
       ...values,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
   console.log(values);
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
     props.updateRecipe(values, props.data.id, props.history);
   };
@@ -42,17 +45,21 @@ function UpdateRecipe(props) {
           <span>Meal Type:</span>
 
           <select
-            value={props.data.meal_type_id}
-            onChange={handleChange}
+            value={mealType}
+            onChange={(e) => {
+              setmealType(e.target.value);
+              handleChange(e);
+            }}
             name="mealtype"
           >
-            {mealType.map((meal, index) => (
+            {type.map((meal, index) => (
               <option key={index} value={index + 1}>
                 {meal}
               </option>
             ))}
           </select>
         </div>
+        {/* <MealType setmealType={setmealType} type={mealType}/> */}
         <div className="field">
           <label htmlFor="ingredients">ingredients: </label>
           <input
@@ -86,10 +93,10 @@ function UpdateRecipe(props) {
   );
 }
 
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
   return {
     isloading: state.isloading,
-    data: state.data
+    data: state.data,
   };
 };
 

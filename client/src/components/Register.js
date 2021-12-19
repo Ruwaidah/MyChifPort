@@ -4,7 +4,6 @@ import { signUp, cleanState } from "../actions/index.js";
 import "./register.scss";
 
 function Register(props) {
-  console.log(props.error);
   const [values, setValues] = useState({
     username: null,
     firstname: null,

@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 function MealType(props) {
-  console.log(props);
-
   const onChange = e => {
     props.setmealType(e.target.value);
   };

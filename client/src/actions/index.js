@@ -18,7 +18,6 @@ export const globalRecipes = () => (dispatch) => {
   axiosWithAuth()
     .get("api/recipes")
     .then((respo) => {
-      console.log(respo);
       dispatch({
         type: GLOBAL_RECIPES_FETCH,
         payload: respo.data,
@@ -35,14 +34,12 @@ export const globalRecipes = () => (dispatch) => {
 // Get User Recipes
 export const userRecipes = (id) => (dispatch) => {
   // const authAxios = axiosWithAuth();
-  console.log(sessionStorage.getItem("userid"));
   dispatch({
     type: LOADING,
   });
   axiosWithAuth()
     .get(`api/auth/user/${sessionStorage.getItem("userid")}`)
     .then((respo) => {
-      console.log(respo);
       dispatch({
         type: USER_RECIPES,
         payload: respo.data,
@@ -64,7 +61,6 @@ export const loginUser = (user, history, showlogin) => (dispatch) => {
   axiosWithAuth()
     .post("api/auth/login", user)
     .then((respo) => {
-      console.log(respo);
       showlogin(false);
       sessionStorage.setItem("token", respo.data.token);
       sessionStorage.setItem("userid", respo.data.user.id);
@@ -84,11 +80,9 @@ export const loginUser = (user, history, showlogin) => (dispatch) => {
 
 // Post Signup
 export const signUp = (values, showsignup) => (dispatch) => {
-  console.log(values);
   axiosWithAuth()
     .post("api/auth/register", values)
     .then((respo) => {
-      console.log(respo);
       showsignup(false);
     })
     .catch((error) =>
@@ -105,7 +99,6 @@ export const addRecipe = (image, values, history) => (dispatch) => {
     type: LOADING,
   });
   // const authAxios = axiosWithAuth();
-  console.log("image", sessionStorage.getItem("token"));
   axiosWithAuth()
     .post(`api/auth/user/image`, image)
     .then((imageId) => {
@@ -124,14 +117,12 @@ export const addRecipe = (image, values, history) => (dispatch) => {
 
 // Recipe By ID
 export const recipeById = (id) => (dispatch) => {
-  console.log(id);
   dispatch({
     type: LOADING,
   });
   axiosWithAuth()
     .get(`api/recipes/${id}`)
     .then((respo) => {
-      console.log(respo);
       dispatch({
         type: RECIPE_FETCH,
         payload: respo.data,
@@ -161,7 +152,6 @@ export const deleteRecipe = (id, history) => (dispatch) => {
     .delete(`api/auth/user/recipes/${id}`)
     .then((respo) => {
       dispatch({ type: ADDING_RECIPE, payload: respo });
-      console.log(id);
       history.push("/user");
     })
     .catch((error) => console.log(error));

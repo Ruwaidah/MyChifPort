@@ -5,7 +5,6 @@ import Image from "../Food.png"
 import "./header.scss"
 
 function Header(props) {
-  console.log(Image);
   const login = event => {
     props.setViewLogin(true);
   };

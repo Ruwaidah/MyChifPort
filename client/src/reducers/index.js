@@ -27,7 +27,6 @@ export const rootReducer = (state = initiallstate, actions) => {
         error: null,
       };
     case GLOBAL_RECIPES_FETCH:
-      console.log(actions.payload);
       return {
         ...state,
         recipes: actions.payload,
@@ -41,7 +40,6 @@ export const rootReducer = (state = initiallstate, actions) => {
         error: actions.payload.response.data.message,
       };
     case LOGIN_FETCH:
-      console.log(actions.payload);
       return {
         ...state,
         user: actions.payload,
@@ -49,7 +47,6 @@ export const rootReducer = (state = initiallstate, actions) => {
         error: null,
       };
     case RECIPE_FETCH:
-      console.log(actions.payload);
       return {
         ...state,
         data: actions.payload,
@@ -57,7 +54,6 @@ export const rootReducer = (state = initiallstate, actions) => {
         error: null,
       };
     case USER_RECIPES:
-      console.log(actions.payload);
       return {
         ...state,
         userRecipes: actions.payload,
