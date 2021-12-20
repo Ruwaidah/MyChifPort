@@ -33,7 +33,6 @@ export const globalRecipes = () => (dispatch) => {
 
 // Get User Recipes
 export const userRecipes = (id) => (dispatch) => {
-  // const authAxios = axiosWithAuth();
   dispatch({
     type: LOADING,
   });
@@ -98,7 +97,6 @@ export const addRecipe = (image, values, history) => (dispatch) => {
   dispatch({
     type: LOADING,
   });
-  // const authAxios = axiosWithAuth();
   axiosWithAuth()
     .post(`api/auth/user/image`, image)
     .then((imageId) => {
@@ -133,8 +131,6 @@ export const recipeById = (id) => (dispatch) => {
 
 // Update Recipe
 export const updateRecipe = (values, id, history) => (dispatch) => {
-  // const authAxios = axiosWithAuth();
-
   axiosWithAuth()
     .put(`api/auth/user/recipes/${id}`, values)
     .then((respo) => {
@@ -146,8 +142,6 @@ export const updateRecipe = (values, id, history) => (dispatch) => {
 
 // Delete Recipe
 export const deleteRecipe = (id, history) => (dispatch) => {
-  // const authAxios = axiosWithAuth();
-
   axiosWithAuth()
     .delete(`api/auth/user/recipes/${id}`)
     .then((respo) => {
