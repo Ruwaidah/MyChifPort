@@ -1,7 +1,7 @@
 #signupform {
     width: 60%;
     top: 15%;
-    left: 30%;
+    left: 34%;
   }
   
   
@@ -11,9 +11,10 @@
   
   #signup input {
     width: 80%;
-    height: 68px;
+    height: 50px;
     border-radius: 7px;
     padding-left: 10px;
+    font-size: 26px;
     font-family: "Average Sans", sans-serif;
   }
   
@@ -24,14 +25,14 @@
     flex-wrap: wrap;
   }
   #signup .field {
-    width: 45%;
+    width: 42%;
     display: flex;
     // flex-wrap: wrap;
     align-items: flex-start;
   }
   
   #signup .field span {
-    font-size: 38px;
+    font-size: 36px;
     margin-right: 6px;
     color: rgb(214, 91, 91);
   }
@@ -42,10 +43,10 @@
 
   #signup .loginbtn {
     width: 100%;
+    margin-top: 2px;
   }
   #signup .loginbtn button {
     font-family: "Average Sans", sans-serif;
-  
     margin-left: 50px;
     background: none;
     color: rgb(241, 241, 241);
